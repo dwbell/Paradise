@@ -1,6 +1,6 @@
 package pkg.islandadventure.gamestate;
 
-import java.awt.Graphics2D;
+import java.awt.Graphics;
 
 public abstract class GameState {
 
@@ -14,5 +14,5 @@ public abstract class GameState {
 
     public abstract void update();
 
-    public abstract void draw(Graphics2D g);
+    public abstract void draw(Graphics g);
 }

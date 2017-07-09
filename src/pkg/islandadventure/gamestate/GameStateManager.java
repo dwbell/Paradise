@@ -1,11 +1,12 @@
 package pkg.islandadventure.gamestate;
 
-import java.awt.Graphics2D;
+import java.awt.Graphics;
+import pkg.islandadventure.input.Keyboard;
 
 public class GameStateManager {
 
     private boolean paused;
-    private PauseState pauseState;
+    //private PauseState pauseState;
 
     private GameState[] gameStates;
     private int currentState;
@@ -16,12 +17,13 @@ public class GameStateManager {
     public static final int MENU = 1;
     public static final int PLAY = 2;
     public static final int GAMEOVER = 3;
+    
+    private Keyboard key;
 
-    public GameStateManager() {
-
-        //JukeBox.init();
+    public GameStateManager(Keyboard key) {
+        this.key = key;
         paused = false;
-        pauseState = new PauseState(this);
+        //pauseState = new PauseState(this);
 
         gameStates = new GameState[NUM_STATES];
         setState(PLAY);
@@ -33,17 +35,17 @@ public class GameStateManager {
         unloadState(previousState);
         currentState = i;
         if (i == INTRO) {
-            gameStates[i] = new IntroState(this);
-            gameStates[i].init();
+           // gameStates[i] = new IntroState(this);
+            //gameStates[i].init();
         } else if (i == MENU) {
-            gameStates[i] = new MenuState(this);
-            gameStates[i].init();
+          //  gameStates[i] = new MenuState(this);
+           // gameStates[i].init();
         } else if (i == PLAY) {
-            gameStates[i] = new PlayState(this);
+            gameStates[i] = new PlayState(this, key);
             gameStates[i].init();
         } else if (i == GAMEOVER) {
-            gameStates[i] = new GameOverState(this);
-            gameStates[i].init();
+          //  gameStates[i] = new GameOverState(this);
+           // gameStates[i].init();
         }
     }
 
@@ -57,15 +59,15 @@ public class GameStateManager {
 
     public void update() {
         if (paused) {
-            pauseState.update();
+          //  pauseState.update();
         } else if (gameStates[currentState] != null) {
             gameStates[currentState].update();
         }
     }
 
-    public void draw(Graphics2D g) {
+    public void draw(Graphics g) {
         if (paused) {
-            pauseState.draw(g);
+          //  pauseState.draw(g);
         } else if (gameStates[currentState] != null) {
             gameStates[currentState].draw(g);
         }

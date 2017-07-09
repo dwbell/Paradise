@@ -4,16 +4,11 @@ import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
-import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferInt;
 import javax.swing.JFrame;
-import pkg.islandadventure.entity.mob.Player;
-import pkg.islandadventure.graphics.Screen;
+import pkg.islandadventure.gamestate.GameStateManager;
 import pkg.islandadventure.input.Keyboard;
 import pkg.islandadventure.input.Mouse;
-import pkg.islandadventure.level.Level;
-import pkg.islandadventure.level.SpawnLevel;
-import pkg.islandadventure.level.TileCoordinate;
+
 
 public class Game extends Canvas implements Runnable {
 
@@ -23,34 +18,29 @@ public class Game extends Canvas implements Runnable {
     private static final int SCREEN_HEIGHT = 256;
     private static final int SCALE = 3;
     private static final String TITLE = "Island Adventure";
-    private BufferedImage image = new BufferedImage(SCREEN_WIDTH, SCREEN_HEIGHT, BufferedImage.TYPE_INT_RGB);
+   
 
-    //Convert image object into array of pixel colors
-    private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
-
-    //Game
     private Thread thread;
     private JFrame frame;
-    private Level level;
-    private Player player;
     private boolean running = false;
-    private Screen screen;
-    private Keyboard key;
+    private static Keyboard key;
+    private GameStateManager gsm;
+    
 
     public Game() {
 
         //JFrame Size
         Dimension size = new Dimension(SCREEN_WIDTH * SCALE, SCREEN_HEIGHT * SCALE);
         setPreferredSize(size);
+        setFocusable(true);
+        requestFocus();
 
         //Initializing Classes
-        screen = new Screen(SCREEN_WIDTH, SCREEN_HEIGHT);
         frame = new JFrame();
         key = new Keyboard();
-        level = new SpawnLevel("/textures/level.png");
-        TileCoordinate playerSpawn = new TileCoordinate(5, 5);
-        player = new Player(playerSpawn.x(), playerSpawn.y(), key);
-        player.init(level);
+        
+        //Game State Manager
+        gsm = new GameStateManager(key);
 
         //Input Listening
         addKeyListener(key);
@@ -127,17 +117,10 @@ public class Game extends Canvas implements Runnable {
     /****************************************************
      * Name:        update
      * Description: Restricted to updating ~60 times per
-     * second. By using xScroll, yScroll we can animate
-     * only what is visible to the player. Saving resources
+     * second. 
      ****************************************************/
     public void update() {
-        key.update();
-        player.update();
-
-        int xScroll = player.x - screen.width / 2;
-        int yScroll = player.y - screen.height / 2;
-        level.update(xScroll, yScroll, screen);
-
+        gsm.update();
     }
 
     /****************************************************
@@ -151,45 +134,19 @@ public class Game extends Canvas implements Runnable {
             createBufferStrategy(3);
             return;
         }
-        screen.clear();
 
-        //Setting player to center of screen
-        int xScroll = player.x - screen.width / 2;
-        int yScroll = player.y - screen.height / 2;
-        //Levels render
-        level.render(xScroll, yScroll, screen);
-        //Putting player on screen
-        player.render(screen);
-
-        System.arraycopy(screen.pixels, 0, pixels, 0, pixels.length);
-
-        //Any graphics to screen within { }
+        //Graphics rendering
         Graphics g = bs.getDrawGraphics();
         {
-            g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
+            gsm.draw(g);
         }
+        
         
         g.dispose(); //manual garbage collection
         bs.show(); //makes next buffer available
     }
 
     
-    /****************************************************
-     * Name:        getScreenWidth
-     * Description: Getter method, returning screen width
-     ****************************************************/
-    public int getScreenWidth() {
-        return SCREEN_WIDTH;
-    }
-
-    /****************************************************
-     * Name:        getScreenHeight
-     * Description: Getter method, returning screen height
-     ****************************************************/
-    public int getScreenHeight() {
-        return SCREEN_HEIGHT;
-    }
-
     /***********
      Main Class
      ************/
@@ -204,6 +161,5 @@ public class Game extends Canvas implements Runnable {
         game.frame.setVisible(true);
 
         game.start();
-        
     }
 }
