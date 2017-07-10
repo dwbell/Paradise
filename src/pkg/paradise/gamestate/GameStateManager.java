@@ -1,7 +1,7 @@
-package pkg.islandadventure.gamestate;
+package pkg.paradise.gamestate;
 
 import java.awt.Graphics;
-import pkg.islandadventure.input.Keyboard;
+import pkg.paradise.utility.Keyboard;
 
 public class GameStateManager {
 
@@ -38,8 +38,8 @@ public class GameStateManager {
             gameStates[i] = new IntroState(this, keyboard);
             gameStates[i].init();
         } else if (i == MENU) {
-          //  gameStates[i] = new MenuState(this);
-           // gameStates[i].init();
+            gameStates[i] = new MenuState(this, keyboard);
+            gameStates[i].init();
         } else if (i == PLAY) {
             gameStates[i] = new PlayState(this, keyboard);
             gameStates[i].init();

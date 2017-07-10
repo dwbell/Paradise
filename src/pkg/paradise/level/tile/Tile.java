@@ -1,7 +1,7 @@
-package pkg.islandadventure.level.tile;
+package pkg.paradise.level.tile;
 
-import pkg.islandadventure.graphics.Screen;
-import pkg.islandadventure.graphics.Sprite;
+import pkg.paradise.graphics.Screen;
+import pkg.paradise.graphics.Sprite;
 
 public class Tile {
 

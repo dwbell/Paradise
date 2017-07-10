@@ -1,4 +1,4 @@
-package pkg.islandadventure.level;
+package pkg.paradise.level;
 
 public class TileCoordinate {
 

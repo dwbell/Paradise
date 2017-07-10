@@ -1,22 +1,22 @@
-package pkg.islandadventure.main;
+package pkg.paradise.main;
 
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import javax.swing.JFrame;
-import pkg.islandadventure.gamestate.GameStateManager;
-import pkg.islandadventure.input.Keyboard;
-import pkg.islandadventure.input.Mouse;
+import pkg.paradise.gamestate.GameStateManager;
+import pkg.paradise.utility.Keyboard;
+import pkg.paradise.utility.Mouse;
 
 public class Game extends Canvas implements Runnable {
 
     //Window
     private static final long serialVersionUID = 1L;
-    private static final int SCREEN_WIDTH = 256;
-    private static final int SCREEN_HEIGHT = 256;
-    private static final int SCALE = 3;
-    private static final String TITLE = "Island Adventure";
+    public static final int SCREEN_WIDTH = 256;
+    public static final int SCREEN_HEIGHT = 256;
+    public static final int SCALE = 3;
+    private static final String TITLE = "Paradise";
 
     private Thread thread;
     private JFrame frame;
@@ -148,7 +148,7 @@ public class Game extends Canvas implements Runnable {
     public static void main(String[] args) {
         Game game = new Game();
         game.frame.setResizable(false);
-        game.frame.setTitle("Island Adventure");
+        game.frame.setTitle("Paradise");
         game.frame.add(game);
         game.frame.pack();
         game.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

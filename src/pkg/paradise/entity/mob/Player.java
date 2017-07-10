@@ -1,8 +1,8 @@
-package pkg.islandadventure.entity.mob;
+package pkg.paradise.entity.mob;
 
-import pkg.islandadventure.graphics.Screen;
-import pkg.islandadventure.graphics.Sprite;
-import pkg.islandadventure.input.Keyboard;
+import pkg.paradise.graphics.Screen;
+import pkg.paradise.graphics.Sprite;
+import pkg.paradise.utility.Keyboard;
 
 public class Player extends Mob {
 

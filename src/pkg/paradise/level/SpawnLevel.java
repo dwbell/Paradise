@@ -1,4 +1,4 @@
-package pkg.islandadventure.level;
+package pkg.paradise.level;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;

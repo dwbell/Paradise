@@ -1,4 +1,4 @@
-package pkg.islandadventure.graphics;
+package pkg.paradise.graphics;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;

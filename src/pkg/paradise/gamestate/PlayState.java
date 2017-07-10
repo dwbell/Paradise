@@ -1,14 +1,15 @@
-package pkg.islandadventure.gamestate;
+package pkg.paradise.gamestate;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
-import pkg.islandadventure.entity.mob.Player;
-import pkg.islandadventure.graphics.Screen;
-import pkg.islandadventure.input.Keyboard;
-import pkg.islandadventure.level.Level;
-import pkg.islandadventure.level.SpawnLevel;
-import pkg.islandadventure.level.TileCoordinate;
+import pkg.paradise.entity.mob.Player;
+import pkg.paradise.graphics.Screen;
+import pkg.paradise.utility.Keyboard;
+import pkg.paradise.level.Level;
+import pkg.paradise.level.SpawnLevel;
+import pkg.paradise.level.TileCoordinate;
+import pkg.paradise.main.Game;
 
 public class PlayState extends GameState {
 
@@ -16,7 +17,7 @@ public class PlayState extends GameState {
     private Player player;
     private Screen screen;
 
-    private BufferedImage image = new BufferedImage(SCREEN_WIDTH, SCREEN_HEIGHT, BufferedImage.TYPE_INT_RGB);
+    private BufferedImage image = new BufferedImage(Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT, BufferedImage.TYPE_INT_RGB);
     private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
 
     public PlayState(GameStateManager gsm, Keyboard keyboard) {
@@ -26,7 +27,7 @@ public class PlayState extends GameState {
 
     @Override
     public void init() {
-        screen = new Screen(SCREEN_WIDTH, SCREEN_HEIGHT);
+        screen = new Screen(Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT);
         level = new SpawnLevel("/textures/level.png");
         TileCoordinate playerSpawn = new TileCoordinate(5, 5);
         player = new Player(playerSpawn.x(), playerSpawn.y(), keyboard);
@@ -54,7 +55,7 @@ public class PlayState extends GameState {
         //Putting player on screen
         player.render(screen);
         System.arraycopy(screen.pixels, 0, pixels, 0, pixels.length);
-        g.drawImage(image, 0, 0, SCREEN_WIDTH * 3, SCREEN_HEIGHT * 3, null);
+        g.drawImage(image, 0, 0, Game.SCREEN_WIDTH * Game.SCALE, Game.SCREEN_HEIGHT * Game.SCALE, null);
     }
 
     @Override

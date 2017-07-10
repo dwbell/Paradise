@@ -1,10 +1,11 @@
-package pkg.islandadventure.gamestate;
+package pkg.paradise.gamestate;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
-import pkg.islandadventure.input.Keyboard;
+import pkg.paradise.utility.Keyboard;
+import pkg.paradise.main.Game;
 
 public class IntroState extends GameState {
 
@@ -56,10 +57,10 @@ public class IntroState extends GameState {
     @Override
     public void draw(Graphics g) {
         g.setColor(Color.WHITE);
-        g.fillRect(0, 0, 256, 256);
-        g.drawImage(logo, 0, 0, SCREEN_WIDTH * SCALE, SCREEN_HEIGHT * SCALE, null);
+        g.fillRect(0, 0, Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT);
+        g.drawImage(logo, 0, 0, Game.SCREEN_WIDTH * Game.SCALE, Game.SCREEN_HEIGHT * Game.SCALE, null);
         g.setColor(new Color(0, 0, 0, alpha));
-        g.fillRect(0, 0, SCREEN_WIDTH * SCALE, SCREEN_HEIGHT * SCALE);
+        g.fillRect(0, 0, Game.SCREEN_WIDTH * Game.SCALE, Game.SCREEN_HEIGHT * Game.SCALE);
     }
 
     public void handleInput() {

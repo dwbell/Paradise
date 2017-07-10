@@ -1,14 +1,10 @@
-package pkg.islandadventure.gamestate;
+package pkg.paradise.gamestate;
 
 import java.awt.Graphics;
-import pkg.islandadventure.input.Keyboard;
+import pkg.paradise.utility.Keyboard;
 
 public abstract class GameState {
 
-    protected static final int SCREEN_WIDTH = 256;
-    protected static final int SCREEN_HEIGHT = 256;
-    protected static final int SCALE = 3;
-    
     protected GameStateManager gsm;
     protected Keyboard keyboard;
 
@@ -22,6 +18,6 @@ public abstract class GameState {
     public abstract void update();
 
     public abstract void draw(Graphics g);
-    
+
     public abstract void handleInput();
 }

@@ -1,4 +1,4 @@
-package pkg.islandadventure.graphics;
+package pkg.paradise.graphics;
 
 public class Sprite {
 

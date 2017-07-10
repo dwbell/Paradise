@@ -1,6 +1,6 @@
-package pkg.islandadventure.graphics;
+package pkg.paradise.graphics;
 
-import pkg.islandadventure.level.tile.Tile;
+import pkg.paradise.level.tile.Tile;
 
 public class Screen {
 

@@ -1,8 +1,8 @@
-package pkg.islandadventure.level;
+package pkg.paradise.level;
 
 import java.util.Random;
-import pkg.islandadventure.graphics.Screen;
-import pkg.islandadventure.level.tile.Tile;
+import pkg.paradise.graphics.Screen;
+import pkg.paradise.level.tile.Tile;
 
 public class Level {
 

@@ -1,8 +1,8 @@
-package pkg.islandadventure.entity;
+package pkg.paradise.entity;
 
 import java.util.Random;
-import pkg.islandadventure.graphics.Screen;
-import pkg.islandadventure.level.Level;
+import pkg.paradise.graphics.Screen;
+import pkg.paradise.level.Level;
 
 
 public abstract class Entity {

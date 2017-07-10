@@ -1,7 +1,7 @@
-package pkg.islandadventure.entity.mob;
+package pkg.paradise.entity.mob;
 
-import pkg.islandadventure.entity.Entity;
-import pkg.islandadventure.graphics.Sprite;
+import pkg.paradise.entity.Entity;
+import pkg.paradise.graphics.Sprite;
 
 public abstract class Mob extends Entity {
 

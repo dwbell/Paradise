@@ -1,4 +1,4 @@
-package pkg.islandadventure.input;
+package pkg.paradise.utility;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
