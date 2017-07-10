@@ -18,15 +18,15 @@ public class GameStateManager {
     public static final int PLAY = 2;
     public static final int GAMEOVER = 3;
     
-    private Keyboard key;
+    private Keyboard keyboard;
 
-    public GameStateManager(Keyboard key) {
-        this.key = key;
+    public GameStateManager(Keyboard keyboard) {
+        this.keyboard = keyboard;
         paused = false;
         //pauseState = new PauseState(this);
 
         gameStates = new GameState[NUM_STATES];
-        setState(PLAY);
+        setState(INTRO);
 
     }
 
@@ -35,13 +35,13 @@ public class GameStateManager {
         unloadState(previousState);
         currentState = i;
         if (i == INTRO) {
-           // gameStates[i] = new IntroState(this);
-            //gameStates[i].init();
+            gameStates[i] = new IntroState(this, keyboard);
+            gameStates[i].init();
         } else if (i == MENU) {
           //  gameStates[i] = new MenuState(this);
            // gameStates[i].init();
         } else if (i == PLAY) {
-            gameStates[i] = new PlayState(this, key);
+            gameStates[i] = new PlayState(this, keyboard);
             gameStates[i].init();
         } else if (i == GAMEOVER) {
           //  gameStates[i] = new GameOverState(this);

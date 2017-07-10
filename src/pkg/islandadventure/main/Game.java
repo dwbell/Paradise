@@ -9,7 +9,6 @@ import pkg.islandadventure.gamestate.GameStateManager;
 import pkg.islandadventure.input.Keyboard;
 import pkg.islandadventure.input.Mouse;
 
-
 public class Game extends Canvas implements Runnable {
 
     //Window
@@ -18,14 +17,12 @@ public class Game extends Canvas implements Runnable {
     private static final int SCREEN_HEIGHT = 256;
     private static final int SCALE = 3;
     private static final String TITLE = "Island Adventure";
-   
 
     private Thread thread;
     private JFrame frame;
     private boolean running = false;
     private static Keyboard key;
     private GameStateManager gsm;
-    
 
     public Game() {
 
@@ -38,7 +35,7 @@ public class Game extends Canvas implements Runnable {
         //Initializing Classes
         frame = new JFrame();
         key = new Keyboard();
-        
+
         //Game State Manager
         gsm = new GameStateManager(key);
 
@@ -140,13 +137,11 @@ public class Game extends Canvas implements Runnable {
         {
             gsm.draw(g);
         }
-        
-        
+
         g.dispose(); //manual garbage collection
         bs.show(); //makes next buffer available
     }
 
-    
     /***********
      Main Class
      ************/
