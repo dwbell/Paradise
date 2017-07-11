@@ -30,10 +30,19 @@ public class GameStateManager {
 
     }
 
+    /****************************************************
+     * Name: setPaused
+     * Description: Sets paused state status
+     ****************************************************/
     public void setPaused(boolean b) {
         paused = b;
     }
 
+    /****************************************************
+     * Name: setState
+     * Description: Initializes the given game state. 
+     * Is the control mechanism for switching states. 
+     ****************************************************/
     public void setState(int state) {
         previousState = currentState;
         unloadState(previousState);
@@ -52,19 +61,27 @@ public class GameStateManager {
                 gameStates[state] = new PlayState(this, keyboard);
                 gameStates[state].init();
                 break;
-            //  gameStates[i] = new GameOverState(this);
-            // gameStates[i].init();
             case GAMEOVER:
+                //  gameStates[i] = new GameOverState(this);
+                // gameStates[i].init();
                 break;
             default:
                 break;
         }
     }
 
+    /****************************************************
+     * Name: unloadState
+     * Description: Sets a state to null
+     ****************************************************/
     public void unloadState(int i) {
         gameStates[i] = null;
     }
 
+     /****************************************************
+     * Name: update
+     * Description:  Updates with respect to a paused game
+     ****************************************************/
     public void update() {
         if (paused) {
             pauseState.update();
@@ -73,6 +90,10 @@ public class GameStateManager {
         }
     }
 
+     /****************************************************
+     * Name: render
+     * Description: Renders with respect to a paused game
+     ****************************************************/
     public void render(Graphics g) {
         if (paused) {
             pauseState.render(g);

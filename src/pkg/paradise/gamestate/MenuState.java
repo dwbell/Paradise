@@ -15,6 +15,10 @@ public class MenuState extends GameState {
         super(gsm, keyboard);
     }
 
+     /****************************************************
+     * Name: init
+     * Description: Initializes Menu image
+     ****************************************************/
     @Override
     public void init() {
         try {
@@ -24,18 +28,30 @@ public class MenuState extends GameState {
         }
     }
 
+     /****************************************************
+     * Name: update
+     * Description: Update keyboard and check user input 
+     ****************************************************/
     @Override
     public void update() {
         keyboard.update();
         handleInput();
     }
 
+    /****************************************************
+     * Name: render
+     * Description: 
+     ****************************************************/
     @Override
     public void render(Graphics g) {
         g.setColor(Color.BLACK);
         g.drawImage(bg, 0, 0, Game.SCREEN_WIDTH * Game.SCALE, Game.SCREEN_HEIGHT * Game.SCALE, null);
     }
 
+    /****************************************************
+     * Name: handleInput
+     * Description: 
+     ****************************************************/
     @Override
     public void handleInput() {
         if (keyboard.enter()) {

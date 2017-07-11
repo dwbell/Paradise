@@ -24,6 +24,10 @@ public class PlayState extends GameState {
         super(gsm, keyboard);
     }
 
+    /****************************************************
+     * Name: init
+     * Description: Initialize screen, leve, and player. 
+     ****************************************************/
     @Override
     public void init() {
         screen = new Screen(Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT);
@@ -33,6 +37,11 @@ public class PlayState extends GameState {
         player.init(level);
     }
 
+    /****************************************************
+     * Name: update
+     * Description: Update keyboard, user input, and 
+     * adjust the values for which the screen is centered.
+     ****************************************************/
     @Override
     public void update() {
         keyboard.update();
@@ -43,6 +52,11 @@ public class PlayState extends GameState {
         level.update(xScroll, yScroll, screen);
     }
 
+    /****************************************************
+     * Name: render
+     * Description: Draws the entirety of the 'Play' 
+     * game state. 
+     ****************************************************/
     @Override
     public void render(Graphics g) {
         screen.clear();
@@ -58,9 +72,12 @@ public class PlayState extends GameState {
         g.drawImage(image, 0, 0, Game.SCREEN_WIDTH * Game.SCALE, Game.SCREEN_HEIGHT * Game.SCALE, null);
     }
 
+    /****************************************************
+     * Name: handleInput
+     * Description: Sets the game state to 'Paused'
+     ****************************************************/
     @Override
     public void handleInput() {
-        System.out.println(keyboard.pause());
         if (keyboard.pause()) {
             gsm.setPaused(true);
         }

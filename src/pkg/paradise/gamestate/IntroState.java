@@ -22,6 +22,10 @@ public class IntroState extends GameState {
         super(gsm, keyboard);
     }
 
+     /****************************************************
+     * Name: init
+     * Description: Initializes logo image
+     ****************************************************/
     @Override
     public void init() {
         ticks = 0;
@@ -32,6 +36,12 @@ public class IntroState extends GameState {
         }
     }
 
+     /****************************************************
+     * Name: update
+     * Description: Creates a fade in / fade out effect
+     * for the opening logo. Will also change states
+     * once animation is done.
+     ****************************************************/
     @Override
     public void update() {
         keyboard.update();
@@ -54,6 +64,10 @@ public class IntroState extends GameState {
         }
     }
 
+     /****************************************************
+     * Name: render
+     * Description: Draws up logo and effects
+     ****************************************************/
     @Override
     public void render(Graphics g) {
         g.setColor(Color.WHITE);
@@ -63,6 +77,11 @@ public class IntroState extends GameState {
         g.fillRect(0, 0, Game.SCREEN_WIDTH * Game.SCALE, Game.SCREEN_HEIGHT * Game.SCALE);
     }
 
+     /****************************************************
+     * Name: handleInput
+     * Description: If enter is pressed immediately jump to 
+     * menu state. 
+     ****************************************************/
     public void handleInput() {
         if (keyboard.enter()) {
             gsm.setState(GameStateManager.MENU);

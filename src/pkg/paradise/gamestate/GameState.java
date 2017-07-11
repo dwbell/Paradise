@@ -3,6 +3,7 @@ package pkg.paradise.gamestate;
 import java.awt.Graphics;
 import pkg.paradise.utility.Keyboard;
 
+
 public abstract class GameState {
 
     protected GameStateManager gsm;
