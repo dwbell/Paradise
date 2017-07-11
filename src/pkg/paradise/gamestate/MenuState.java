@@ -7,10 +7,10 @@ import javax.imageio.ImageIO;
 import pkg.paradise.main.Game;
 import pkg.paradise.utility.Keyboard;
 
-public class MenuState extends GameState{
-    
+public class MenuState extends GameState {
+
     private BufferedImage bg;
-    
+
     public MenuState(GameStateManager gsm, Keyboard keyboard) {
         super(gsm, keyboard);
     }
@@ -26,20 +26,21 @@ public class MenuState extends GameState{
 
     @Override
     public void update() {
-        
+        keyboard.update();
+        handleInput();
     }
 
     @Override
-    public void draw(Graphics g) {
+    public void render(Graphics g) {
         g.setColor(Color.BLACK);
         g.drawImage(bg, 0, 0, Game.SCREEN_WIDTH * Game.SCALE, Game.SCREEN_HEIGHT * Game.SCALE, null);
     }
 
     @Override
     public void handleInput() {
-        if(keyboard.enter()){
-            
+        if (keyboard.enter()) {
+            gsm.setState(GameStateManager.PLAY);
         }
     }
-    
+
 }

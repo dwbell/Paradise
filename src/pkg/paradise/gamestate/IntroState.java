@@ -50,12 +50,12 @@ public class IntroState extends GameState {
             }
         }
         if (ticks > FADE_IN + LENGTH + FADE_OUT) {
-            gsm.setState(GameStateManager.PLAY);
+            gsm.setState(GameStateManager.MENU);
         }
     }
 
     @Override
-    public void draw(Graphics g) {
+    public void render(Graphics g) {
         g.setColor(Color.WHITE);
         g.fillRect(0, 0, Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT);
         g.drawImage(logo, 0, 0, Game.SCREEN_WIDTH * Game.SCALE, Game.SCREEN_HEIGHT * Game.SCALE, null);
@@ -65,9 +65,7 @@ public class IntroState extends GameState {
 
     public void handleInput() {
         if (keyboard.enter()) {
-            gsm.setState(GameStateManager.PLAY);
+            gsm.setState(GameStateManager.MENU);
         }
-
     }
-
 }

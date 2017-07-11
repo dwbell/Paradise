@@ -6,7 +6,7 @@ import pkg.paradise.utility.Keyboard;
 public class GameStateManager {
 
     private boolean paused;
-    //private PauseState pauseState;
+    private PauseState pauseState;
 
     private GameState[] gameStates;
     private int currentState;
@@ -17,35 +17,47 @@ public class GameStateManager {
     public static final int MENU = 1;
     public static final int PLAY = 2;
     public static final int GAMEOVER = 3;
-    
+
     private Keyboard keyboard;
 
     public GameStateManager(Keyboard keyboard) {
         this.keyboard = keyboard;
         paused = false;
-        //pauseState = new PauseState(this);
+        pauseState = new PauseState(this, keyboard);
 
         gameStates = new GameState[NUM_STATES];
         setState(INTRO);
 
     }
 
-    public void setState(int i) {
+    public void setPaused(boolean b) {
+        paused = b;
+    }
+
+    public void setState(int state) {
         previousState = currentState;
         unloadState(previousState);
-        currentState = i;
-        if (i == INTRO) {
-            gameStates[i] = new IntroState(this, keyboard);
-            gameStates[i].init();
-        } else if (i == MENU) {
-            gameStates[i] = new MenuState(this, keyboard);
-            gameStates[i].init();
-        } else if (i == PLAY) {
-            gameStates[i] = new PlayState(this, keyboard);
-            gameStates[i].init();
-        } else if (i == GAMEOVER) {
-          //  gameStates[i] = new GameOverState(this);
-           // gameStates[i].init();
+        currentState = state;
+
+        switch (state) {
+            case INTRO:
+                gameStates[state] = new IntroState(this, keyboard);
+                gameStates[state].init();
+                break;
+            case MENU:
+                gameStates[state] = new MenuState(this, keyboard);
+                gameStates[state].init();
+                break;
+            case PLAY:
+                gameStates[state] = new PlayState(this, keyboard);
+                gameStates[state].init();
+                break;
+            //  gameStates[i] = new GameOverState(this);
+            // gameStates[i].init();
+            case GAMEOVER:
+                break;
+            default:
+                break;
         }
     }
 
@@ -53,23 +65,19 @@ public class GameStateManager {
         gameStates[i] = null;
     }
 
-    public void setPaused(boolean b) {
-        paused = b;
-    }
-
     public void update() {
         if (paused) {
-          //  pauseState.update();
+            pauseState.update();
         } else if (gameStates[currentState] != null) {
             gameStates[currentState].update();
         }
     }
 
-    public void draw(Graphics g) {
+    public void render(Graphics g) {
         if (paused) {
-          //  pauseState.draw(g);
+            pauseState.render(g);
         } else if (gameStates[currentState] != null) {
-            gameStates[currentState].draw(g);
+            gameStates[currentState].render(g);
         }
     }
 

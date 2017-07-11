@@ -22,7 +22,6 @@ public class PlayState extends GameState {
 
     public PlayState(GameStateManager gsm, Keyboard keyboard) {
         super(gsm, keyboard);
-
     }
 
     @Override
@@ -37,6 +36,7 @@ public class PlayState extends GameState {
     @Override
     public void update() {
         keyboard.update();
+        handleInput();
         player.update();
         int xScroll = player.x - screen.width / 2;
         int yScroll = player.y - screen.height / 2;
@@ -44,7 +44,7 @@ public class PlayState extends GameState {
     }
 
     @Override
-    public void draw(Graphics g) {
+    public void render(Graphics g) {
         screen.clear();
 
         //Setting player to center of screen
@@ -60,6 +60,10 @@ public class PlayState extends GameState {
 
     @Override
     public void handleInput() {
+        System.out.println(keyboard.pause());
+        if (keyboard.pause()) {
+            gsm.setPaused(true);
+        }
     }
 
 }

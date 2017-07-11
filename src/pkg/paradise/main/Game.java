@@ -135,7 +135,7 @@ public class Game extends Canvas implements Runnable {
         //Graphics rendering
         Graphics g = bs.getDrawGraphics();
         {
-            gsm.draw(g);
+            gsm.render(g);
         }
 
         g.dispose(); //manual garbage collection
