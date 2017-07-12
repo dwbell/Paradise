@@ -65,7 +65,7 @@ public class IntroState extends GameState {
     public void render(Graphics g) {
         g.setColor(Color.WHITE);
         g.fillRect(0, 0, Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT);
-        g.drawImage(Resources.logo, 0, 0, Game.SCREEN_WIDTH * Game.SCALE, Game.SCREEN_HEIGHT * Game.SCALE, null);
+        g.drawImage(Resources.company_logo, 0, 0, Game.SCREEN_WIDTH * Game.SCALE, Game.SCREEN_HEIGHT * Game.SCALE, null);
         g.setColor(new Color(0, 0, 0, alpha));
         g.fillRect(0, 0, Game.SCREEN_WIDTH * Game.SCALE, Game.SCREEN_HEIGHT * Game.SCALE);
     }

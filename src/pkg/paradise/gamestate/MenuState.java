@@ -9,7 +9,6 @@ import pkg.paradise.utility.Resources;
 
 public class MenuState extends GameState {
 
-
     public MenuState(GameStateManager gsm, Keyboard keyboard) {
         super(gsm, keyboard);
     }

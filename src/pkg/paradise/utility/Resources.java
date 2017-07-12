@@ -9,8 +9,8 @@ import javax.imageio.ImageIO;
 
 public class Resources {
 
-    public static Font font;
-    public static BufferedImage logo;
+    public static Font pixel_font;
+    public static BufferedImage company_logo;
     public static BufferedImage menu_bg;
 
     public Resources() {
@@ -24,7 +24,7 @@ public class Resources {
      ****************************************************/
     public void loadImages() {
         try {
-            logo = ImageIO.read(getClass().getResourceAsStream("/bell_labs.png"));
+            company_logo = ImageIO.read(getClass().getResourceAsStream("/bell_labs.png"));
             menu_bg = ImageIO.read(getClass().getResourceAsStream("/Menu.png"));
 
         } catch (Exception e) {
@@ -40,7 +40,7 @@ public class Resources {
     public void loadFont() {
         try {
             InputStream stream = ClassLoader.getSystemClassLoader().getResourceAsStream("pixel_font.ttf");
-            font = Font.createFont(Font.TRUETYPE_FONT, stream).deriveFont(120f);
+            pixel_font = Font.createFont(Font.TRUETYPE_FONT, stream).deriveFont(120f);
         } catch (FontFormatException | IOException ex) {
             ex.printStackTrace();
         }
