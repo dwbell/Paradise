@@ -5,40 +5,57 @@ import java.awt.event.KeyListener;
 
 public class Keyboard implements KeyListener {
 
-    private boolean[] keys = new boolean[120];
+    private boolean[] keys;
+    private int[] polled;
     private boolean up, down, left, right, enter, pause;
 
-    /****************************************************
-     * Name:        update
-     * Description: Keyboards update method which is 
-     * called from Games update method.
-     ****************************************************/
+    public Keyboard() {
+        keys = new boolean[256];
+        polled = new int[256];
+    }
+
     public void update() {
-        up = keys[KeyEvent.VK_UP] || keys[KeyEvent.VK_W];
-        down = keys[KeyEvent.VK_DOWN] || keys[KeyEvent.VK_S];
-        left = keys[KeyEvent.VK_LEFT] || keys[KeyEvent.VK_A];
-        right = keys[KeyEvent.VK_RIGHT] || keys[KeyEvent.VK_D];
-        enter = keys[KeyEvent.VK_ENTER];
-        pause = keys[KeyEvent.VK_ESCAPE];
+        poll();
+    }
+
+    public boolean keyDown(int keyCode) {
+        return polled[keyCode] > 0;
+    }
+
+    public boolean keyDownOnce(int keyCode) {
+        return polled[keyCode] == 1;
 
     }
 
-    /*********************************
-     * Setting key code inputs into
-     * correct position in "keys" array
-     *********************************/
-    @Override
-    public void keyPressed(KeyEvent e) {
-        keys[e.getKeyCode()] = true;
+    public synchronized void poll() {
+        for (int i = 0; i < keys.length; ++i) {
+            if (keys[i]) {
+                polled[i]++;
+            } else {
+                polled[i] = 0;
+            }
+        }
     }
 
     @Override
-    public void keyReleased(KeyEvent e) {
-        keys[e.getKeyCode()] = false;
+    public synchronized void keyPressed(KeyEvent e) {
+        int keyCode = e.getKeyCode();
+        if (keyCode >= 0 && keyCode < keys.length) {
+            keys[keyCode] = true;
+        }
+    }
+
+    @Override
+    public synchronized void keyReleased(KeyEvent e) {
+        int keyCode = e.getKeyCode();
+        if (keyCode >= 0 && keyCode < keys.length) {
+            keys[keyCode] = false;
+        }
     }
 
     @Override
     public void keyTyped(KeyEvent e) {
+        // Not needed
     }
 
     /*********************************
@@ -67,5 +84,4 @@ public class Keyboard implements KeyListener {
     public boolean pause() {
         return pause;
     }
-
 }

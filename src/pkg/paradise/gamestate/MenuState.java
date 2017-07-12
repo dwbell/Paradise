@@ -2,6 +2,7 @@ package pkg.paradise.gamestate;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import pkg.paradise.main.Game;
@@ -15,7 +16,7 @@ public class MenuState extends GameState {
         super(gsm, keyboard);
     }
 
-     /****************************************************
+    /****************************************************
      * Name: init
      * Description: Initializes Menu image
      ****************************************************/
@@ -28,7 +29,7 @@ public class MenuState extends GameState {
         }
     }
 
-     /****************************************************
+    /****************************************************
      * Name: update
      * Description: Update keyboard and check user input 
      ****************************************************/
@@ -54,7 +55,7 @@ public class MenuState extends GameState {
      ****************************************************/
     @Override
     public void handleInput() {
-        if (keyboard.enter()) {
+        if (keyboard.keyDownOnce(KeyEvent.VK_ENTER)) {
             gsm.setState(GameStateManager.PLAY);
         }
     }

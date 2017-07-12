@@ -2,6 +2,7 @@ package pkg.paradise.gamestate;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import pkg.paradise.utility.Keyboard;
@@ -22,7 +23,7 @@ public class IntroState extends GameState {
         super(gsm, keyboard);
     }
 
-     /****************************************************
+    /****************************************************
      * Name: init
      * Description: Initializes logo image
      ****************************************************/
@@ -36,7 +37,7 @@ public class IntroState extends GameState {
         }
     }
 
-     /****************************************************
+    /****************************************************
      * Name: update
      * Description: Creates a fade in / fade out effect
      * for the opening logo. Will also change states
@@ -64,7 +65,7 @@ public class IntroState extends GameState {
         }
     }
 
-     /****************************************************
+    /****************************************************
      * Name: render
      * Description: Draws up logo and effects
      ****************************************************/
@@ -77,13 +78,13 @@ public class IntroState extends GameState {
         g.fillRect(0, 0, Game.SCREEN_WIDTH * Game.SCALE, Game.SCREEN_HEIGHT * Game.SCALE);
     }
 
-     /****************************************************
+    /****************************************************
      * Name: handleInput
      * Description: If enter is pressed immediately jump to 
      * menu state. 
      ****************************************************/
     public void handleInput() {
-        if (keyboard.enter()) {
+        if (keyboard.keyDownOnce(KeyEvent.VK_ENTER)) {
             gsm.setState(GameStateManager.MENU);
         }
     }

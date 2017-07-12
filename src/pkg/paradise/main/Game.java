@@ -18,9 +18,12 @@ public class Game extends Canvas implements Runnable {
     public static final int SCALE = 3;
     private static final String TITLE = "Paradise";
 
+    //Loop
     private Thread thread;
     private JFrame frame;
     private boolean running = false;
+
+    //Declarations
     private static Keyboard key;
     private GameStateManager gsm;
 

@@ -1,5 +1,6 @@
 package pkg.paradise.entity.mob;
 
+import com.sun.glass.events.KeyEvent;
 import pkg.paradise.graphics.Screen;
 import pkg.paradise.graphics.Sprite;
 import pkg.paradise.utility.Keyboard;
@@ -44,16 +45,18 @@ public class Player extends Mob {
 
         //Checking direction
         int xa = 0, ya = 0;
-        if (input.up()) {
+
+        if (input.keyDown(KeyEvent.VK_W)) {
             ya--;
         }
-        if (input.down()) {
+
+        if (input.keyDown(KeyEvent.VK_S)) {
             ya++;
         }
-        if (input.left()) {
+        if (input.keyDown(KeyEvent.VK_A)) {
             xa--;
         }
-        if (input.right()) {
+        if (input.keyDown(KeyEvent.VK_D)) {
             xa++;
         }
 
@@ -76,14 +79,14 @@ public class Player extends Mob {
      ****************************************************/
     @Override
     public void render(Screen screen) {
-        
+
         //North
         if (dir == 0) {
             sprite = Sprite.player_up;
-            if(walking){
-                if(anim % 20 > 10){
+            if (walking) {
+                if (anim % 20 > 10) {
                     sprite = Sprite.player_up_1;
-                }else{
+                } else {
                     sprite = Sprite.player_up_2;
                 }
             }
@@ -91,10 +94,10 @@ public class Player extends Mob {
         //East
         if (dir == 1) {
             sprite = Sprite.player_right;
-            if(walking){
-                if(anim % 20 > 10){
+            if (walking) {
+                if (anim % 20 > 10) {
                     sprite = Sprite.player_right_1;
-                }else{
+                } else {
                     sprite = Sprite.player_right_2;
                 }
             }
@@ -102,10 +105,10 @@ public class Player extends Mob {
         //South
         if (dir == 2) {
             sprite = Sprite.player_down;
-            if(walking){
-                if(anim % 20 > 10){
+            if (walking) {
+                if (anim % 20 > 10) {
                     sprite = Sprite.player_down_1;
-                }else{
+                } else {
                     sprite = Sprite.player_down_2;
                 }
             }
@@ -113,10 +116,10 @@ public class Player extends Mob {
         //West
         if (dir == 3) {
             sprite = Sprite.player_left;
-            if(walking){
-                if(anim % 20 > 10){
+            if (walking) {
+                if (anim % 20 > 10) {
                     sprite = Sprite.player_left_1;
-                }else{
+                } else {
                     sprite = Sprite.player_left_2;
                 }
             }
