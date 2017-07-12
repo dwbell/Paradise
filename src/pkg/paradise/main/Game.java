@@ -2,18 +2,13 @@ package pkg.paradise.main;
 
 import java.awt.Canvas;
 import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 import pkg.paradise.gamestate.GameStateManager;
 import pkg.paradise.utility.Keyboard;
 import pkg.paradise.utility.Mouse;
+import pkg.paradise.utility.Resources;
 
 public class Game extends Canvas implements Runnable {
 
@@ -23,7 +18,6 @@ public class Game extends Canvas implements Runnable {
     public static final int SCREEN_HEIGHT = 256;
     public static final int SCALE = 3;
     private static final String TITLE = "Paradise";
-    public static Font font;
 
     //Loop
     private Thread thread;
@@ -33,6 +27,7 @@ public class Game extends Canvas implements Runnable {
     //Declarations
     private static Keyboard key;
     private GameStateManager gsm;
+    private final Resources resources;
 
     public Game() {
 
@@ -41,6 +36,9 @@ public class Game extends Canvas implements Runnable {
         setPreferredSize(size);
         setFocusable(true);
         requestFocus();
+        
+        //Resource loading
+        resources = new Resources();
 
         //Initializing Classes
         frame = new JFrame();
@@ -49,28 +47,11 @@ public class Game extends Canvas implements Runnable {
         //Game State Manager
         gsm = new GameStateManager(key);
 
-        //Font
-        loadFont();
-
         //Input Listening
         addKeyListener(key);
         Mouse mouse = new Mouse();
         addMouseListener(mouse);
         addMouseMotionListener(mouse);
-    }
-
-    /****************************************************
-     * Name:        loadFont 
-     * Description: Loads up .ttf file with a pixel-esque
-     * design to them. 
-     ****************************************************/
-    public void loadFont() {
-        try {
-            InputStream stream = ClassLoader.getSystemClassLoader().getResourceAsStream("pixel_font.ttf");
-            font = Font.createFont(Font.TRUETYPE_FONT, stream).deriveFont(120f);
-        } catch (FontFormatException | IOException ex) {
-            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     /****************************************************

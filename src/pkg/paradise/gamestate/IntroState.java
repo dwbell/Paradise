@@ -3,14 +3,11 @@ package pkg.paradise.gamestate;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
-import java.awt.image.BufferedImage;
-import javax.imageio.ImageIO;
 import pkg.paradise.utility.Keyboard;
 import pkg.paradise.main.Game;
+import pkg.paradise.utility.Resources;
 
 public class IntroState extends GameState {
-
-    private BufferedImage logo;
 
     private int alpha;
     private int ticks;
@@ -30,11 +27,6 @@ public class IntroState extends GameState {
     @Override
     public void init() {
         ticks = 0;
-        try {
-            logo = ImageIO.read(getClass().getResourceAsStream("/bell_labs.png"));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     /****************************************************
@@ -73,7 +65,7 @@ public class IntroState extends GameState {
     public void render(Graphics g) {
         g.setColor(Color.WHITE);
         g.fillRect(0, 0, Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT);
-        g.drawImage(logo, 0, 0, Game.SCREEN_WIDTH * Game.SCALE, Game.SCREEN_HEIGHT * Game.SCALE, null);
+        g.drawImage(Resources.logo, 0, 0, Game.SCREEN_WIDTH * Game.SCALE, Game.SCREEN_HEIGHT * Game.SCALE, null);
         g.setColor(new Color(0, 0, 0, alpha));
         g.fillRect(0, 0, Game.SCREEN_WIDTH * Game.SCALE, Game.SCREEN_HEIGHT * Game.SCALE);
     }

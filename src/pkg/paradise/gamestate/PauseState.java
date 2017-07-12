@@ -3,9 +3,8 @@ package pkg.paradise.gamestate;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
-import pkg.paradise.main.Game;
-
 import pkg.paradise.utility.Keyboard;
+import pkg.paradise.utility.Resources;
 
 public class PauseState extends GameState {
     
@@ -38,7 +37,7 @@ public class PauseState extends GameState {
      ****************************************************/
     @Override
     public void render(Graphics g) {
-        g.setFont(Game.font);
+        g.setFont(Resources.font);
         g.setColor(Color.WHITE);
         g.drawString("FUCKING MENU", 10, 100);
     }
