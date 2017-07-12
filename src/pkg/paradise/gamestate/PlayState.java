@@ -1,6 +1,7 @@
 package pkg.paradise.gamestate;
 
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 import pkg.paradise.entity.mob.Player;
@@ -78,7 +79,7 @@ public class PlayState extends GameState {
      ****************************************************/
     @Override
     public void handleInput() {
-        if (keyboard.pause()) {
+        if (keyboard.keyDownOnce(KeyEvent.VK_ESCAPE)) {
             gsm.setPaused(true);
         }
     }

@@ -7,7 +7,6 @@ public class Keyboard implements KeyListener {
 
     private boolean[] keys;
     private int[] polled;
-    private boolean up, down, left, right, enter, pause;
 
     public Keyboard() {
         keys = new boolean[256];
@@ -24,7 +23,6 @@ public class Keyboard implements KeyListener {
 
     public boolean keyDownOnce(int keyCode) {
         return polled[keyCode] == 1;
-
     }
 
     public synchronized void poll() {
@@ -55,33 +53,5 @@ public class Keyboard implements KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
-        // Not needed
-    }
-
-    /*********************************
-     * Getter Methods
-     *********************************/
-    public boolean up() {
-        return up;
-    }
-
-    public boolean down() {
-        return down;
-    }
-
-    public boolean left() {
-        return left;
-    }
-
-    public boolean right() {
-        return right;
-    }
-
-    public boolean enter() {
-        return enter;
-    }
-
-    public boolean pause() {
-        return pause;
     }
 }

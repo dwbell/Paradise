@@ -1,10 +1,14 @@
 package pkg.paradise.gamestate;
 
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+import pkg.paradise.main.Game;
+
 import pkg.paradise.utility.Keyboard;
 
 public class PauseState extends GameState {
-
+    
     public PauseState(GameStateManager gsm, Keyboard keyboard) {
         super(gsm, keyboard);
     }
@@ -15,6 +19,7 @@ public class PauseState extends GameState {
      ****************************************************/
     @Override
     public void init() {
+        
     }
 
     /****************************************************
@@ -33,7 +38,9 @@ public class PauseState extends GameState {
      ****************************************************/
     @Override
     public void render(Graphics g) {
-        g.drawString("FUCK OFF", 10, 10);
+        g.setFont(Game.font);
+        g.setColor(Color.WHITE);
+        g.drawString("FUCKING MENU", 10, 100);
     }
 
     /****************************************************
@@ -42,7 +49,7 @@ public class PauseState extends GameState {
      ****************************************************/
     @Override
     public void handleInput() {
-        if (keyboard.pause()) {
+        if (keyboard.keyDownOnce(KeyEvent.VK_ESCAPE)) {
             gsm.setPaused(false);
         }
     }

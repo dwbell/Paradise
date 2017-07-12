@@ -49,7 +49,6 @@ public class Player extends Mob {
         if (input.keyDown(KeyEvent.VK_W)) {
             ya--;
         }
-
         if (input.keyDown(KeyEvent.VK_S)) {
             ya++;
         }
