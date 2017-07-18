@@ -4,13 +4,12 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import pkg.paradise.main.Game;
-import pkg.paradise.utility.Keyboard;
 import pkg.paradise.utility.Resources;
 
 public class MenuState extends GameState {
 
-    public MenuState(GameStateManager gsm, Keyboard keyboard) {
-        super(gsm, keyboard);
+    public MenuState(GameStateManager gsm) {
+        super(gsm);
     }
 
     /****************************************************
@@ -28,7 +27,7 @@ public class MenuState extends GameState {
      ****************************************************/
     @Override
     public void update() {
-        keyboard.update();
+        Game.keyboard.update();
         handleInput();
     }
 
@@ -48,7 +47,7 @@ public class MenuState extends GameState {
      ****************************************************/
     @Override
     public void handleInput() {
-        if (keyboard.keyDownOnce(KeyEvent.VK_ENTER)) {
+        if (Game.keyboard.keyDownOnce(KeyEvent.VK_ENTER)) {
             gsm.setState(GameStateManager.PLAY);
         }
     }

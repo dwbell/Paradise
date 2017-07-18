@@ -3,25 +3,22 @@ package pkg.paradise.entity.mob;
 import com.sun.glass.events.KeyEvent;
 import pkg.paradise.graphics.Screen;
 import pkg.paradise.graphics.Sprite;
-import pkg.paradise.utility.Keyboard;
+import pkg.paradise.main.Game;
 
 public class Player extends Mob {
 
-    private Keyboard input;
     private int anim = 0;
     private boolean walking = false;
 
     //Empty constructor
-    public Player(Keyboard input) {
-        this.input = input;
+    public Player() {
         sprite = Sprite.player_down;
     }
 
     //Constructor with x,y coords to spawn
-    public Player(int x, int y, Keyboard input) {
+    public Player(int x, int y) {
         this.x = x;
         this.y = y;
-        this.input = input;
         sprite = Sprite.player_down;
     }
 
@@ -46,16 +43,16 @@ public class Player extends Mob {
         //Checking direction
         int xa = 0, ya = 0;
 
-        if (input.keyDown(KeyEvent.VK_W)) {
+        if (Game.keyboard.keyDown(KeyEvent.VK_W)) {
             ya--;
         }
-        if (input.keyDown(KeyEvent.VK_S)) {
+        if (Game.keyboard.keyDown(KeyEvent.VK_S)) {
             ya++;
         }
-        if (input.keyDown(KeyEvent.VK_A)) {
+        if (Game.keyboard.keyDown(KeyEvent.VK_A)) {
             xa--;
         }
-        if (input.keyDown(KeyEvent.VK_D)) {
+        if (Game.keyboard.keyDown(KeyEvent.VK_D)) {
             xa++;
         }
 

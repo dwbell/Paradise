@@ -1,7 +1,6 @@
 package pkg.paradise.gamestate;
 
 import java.awt.Graphics;
-import pkg.paradise.utility.Keyboard;
 
 public class GameStateManager {
 
@@ -18,12 +17,9 @@ public class GameStateManager {
     public static final int PLAY = 2;
     public static final int GAMEOVER = 3;
 
-    private Keyboard keyboard;
-
-    public GameStateManager(Keyboard keyboard) {
-        this.keyboard = keyboard;
+    public GameStateManager() {
         paused = false;
-        pauseState = new PauseState(this, keyboard);
+        pauseState = new PauseState(this);
 
         gameStates = new GameState[NUM_STATES];
         setState(INTRO);
@@ -50,15 +46,15 @@ public class GameStateManager {
 
         switch (state) {
             case INTRO:
-                gameStates[state] = new IntroState(this, keyboard);
+                gameStates[state] = new IntroState(this);
                 gameStates[state].init();
                 break;
             case MENU:
-                gameStates[state] = new MenuState(this, keyboard);
+                gameStates[state] = new MenuState(this);
                 gameStates[state].init();
                 break;
             case PLAY:
-                gameStates[state] = new PlayState(this, keyboard);
+                gameStates[state] = new PlayState(this);
                 gameStates[state].init();
                 break;
             case GAMEOVER:

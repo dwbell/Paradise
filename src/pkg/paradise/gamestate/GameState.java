@@ -1,17 +1,13 @@
 package pkg.paradise.gamestate;
 
 import java.awt.Graphics;
-import pkg.paradise.utility.Keyboard;
-
 
 public abstract class GameState {
 
     protected GameStateManager gsm;
-    protected Keyboard keyboard;
 
-    public GameState(GameStateManager gsm, Keyboard keyboard) {
+    public GameState(GameStateManager gsm) {
         this.gsm = gsm;
-        this.keyboard = keyboard;
     }
 
     public abstract void init();

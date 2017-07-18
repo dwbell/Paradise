@@ -25,7 +25,7 @@ public class Game extends Canvas implements Runnable {
     private boolean running = false;
 
     //Declarations
-    private static Keyboard key;
+    public static Keyboard keyboard;
     private GameStateManager gsm;
     private final Resources resources;
 
@@ -42,13 +42,13 @@ public class Game extends Canvas implements Runnable {
 
         //Initializing Classes
         frame = new JFrame();
-        key = new Keyboard();
+        keyboard = new Keyboard();
 
         //Game State Manager
-        gsm = new GameStateManager(key);
+        gsm = new GameStateManager();
 
         //Input Listening
-        addKeyListener(key);
+        addKeyListener(keyboard);
         Mouse mouse = new Mouse();
         addMouseListener(mouse);
         addMouseMotionListener(mouse);

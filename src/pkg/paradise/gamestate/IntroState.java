@@ -3,7 +3,6 @@ package pkg.paradise.gamestate;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
-import pkg.paradise.utility.Keyboard;
 import pkg.paradise.main.Game;
 import pkg.paradise.utility.Resources;
 
@@ -16,8 +15,8 @@ public class IntroState extends GameState {
     private final int LENGTH = 60;
     private final int FADE_OUT = 60;
 
-    public IntroState(GameStateManager gsm, Keyboard keyboard) {
-        super(gsm, keyboard);
+    public IntroState(GameStateManager gsm) {
+        super(gsm);
     }
 
     /****************************************************
@@ -37,7 +36,7 @@ public class IntroState extends GameState {
      ****************************************************/
     @Override
     public void update() {
-        keyboard.update();
+        Game.keyboard.update();
         handleInput();
         ticks++;
         if (ticks < FADE_IN) {
@@ -76,7 +75,7 @@ public class IntroState extends GameState {
      * menu state. 
      ****************************************************/
     public void handleInput() {
-        if (keyboard.keyDownOnce(KeyEvent.VK_ENTER)) {
+        if (Game.keyboard.keyDownOnce(KeyEvent.VK_ENTER)) {
             gsm.setState(GameStateManager.MENU);
         }
     }

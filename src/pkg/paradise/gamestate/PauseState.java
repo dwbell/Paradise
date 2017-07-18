@@ -3,13 +3,13 @@ package pkg.paradise.gamestate;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
-import pkg.paradise.utility.Keyboard;
+import pkg.paradise.main.Game;
 import pkg.paradise.utility.Resources;
 
 public class PauseState extends GameState {
-    
-    public PauseState(GameStateManager gsm, Keyboard keyboard) {
-        super(gsm, keyboard);
+
+    public PauseState(GameStateManager gsm) {
+        super(gsm);
     }
 
     /****************************************************
@@ -18,7 +18,7 @@ public class PauseState extends GameState {
      ****************************************************/
     @Override
     public void init() {
-        
+
     }
 
     /****************************************************
@@ -27,7 +27,7 @@ public class PauseState extends GameState {
      ****************************************************/
     @Override
     public void update() {
-        keyboard.update();
+        Game.keyboard.update();
         handleInput();
     }
 
@@ -48,7 +48,7 @@ public class PauseState extends GameState {
      ****************************************************/
     @Override
     public void handleInput() {
-        if (keyboard.keyDownOnce(KeyEvent.VK_ESCAPE)) {
+        if (Game.keyboard.keyDownOnce(KeyEvent.VK_ESCAPE)) {
             gsm.setPaused(false);
         }
     }

@@ -7,7 +7,6 @@ import java.awt.image.DataBufferInt;
 import pkg.paradise.entity.mob.Player;
 import pkg.paradise.graphics.Screen;
 import pkg.paradise.hud.HUD;
-import pkg.paradise.utility.Keyboard;
 import pkg.paradise.level.Level;
 import pkg.paradise.level.SpawnLevel;
 import pkg.paradise.level.TileCoordinate;
@@ -23,21 +22,22 @@ public class PlayState extends GameState {
     private BufferedImage image = new BufferedImage(Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT, BufferedImage.TYPE_INT_RGB);
     private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
 
-    public PlayState(GameStateManager gsm, Keyboard keyboard) {
-        super(gsm, keyboard);
+    public PlayState(GameStateManager gsm) {
+        super(gsm);
     }
 
     /****************************************************
      * Name: init
-     * Description: Initialize screen, leve, and player. 
+     * Description: Initialize screen, level, and player. 
      ****************************************************/
     @Override
     public void init() {
         screen = new Screen(Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT);
         level = new SpawnLevel("/textures/level.png");
         TileCoordinate playerSpawn = new TileCoordinate(5, 5);
-        player = new Player(playerSpawn.x(), playerSpawn.y(), keyboard);
+        player = new Player(playerSpawn.x(), playerSpawn.y());
         player.init(level);
+
         hud = new HUD(player);
     }
 
@@ -48,9 +48,10 @@ public class PlayState extends GameState {
      ****************************************************/
     @Override
     public void update() {
-        keyboard.update();
+        Game.keyboard.update();
         handleInput();
         player.update();
+        hud.update();
         int xScroll = player.x - screen.width / 2;
         int yScroll = player.y - screen.height / 2;
         level.update(xScroll, yScroll, screen);
@@ -72,12 +73,12 @@ public class PlayState extends GameState {
         level.render(xScroll, yScroll, screen);
         //Putting player on screen
         player.render(screen);
-       
+
         //Drawing up screen
         System.arraycopy(screen.pixels, 0, pixels, 0, pixels.length);
         g.drawImage(image, 0, 0, Game.SCREEN_WIDTH * Game.SCALE, Game.SCREEN_HEIGHT * Game.SCALE, null);
-        
-         //HUD
+
+        //HUD
         hud.render(g);
     }
 
@@ -87,9 +88,8 @@ public class PlayState extends GameState {
      ****************************************************/
     @Override
     public void handleInput() {
-        if (keyboard.keyDownOnce(KeyEvent.VK_ESCAPE)) {
+        if (Game.keyboard.keyDownOnce(KeyEvent.VK_ESCAPE)) {
             gsm.setPaused(true);
         }
     }
-
 }

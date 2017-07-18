@@ -14,6 +14,7 @@ public class Resources {
     public static BufferedImage start_menu;
     //HUD
     public static BufferedImage hud_health_energy;
+    public static BufferedImage hud_inventory;
     public static Font pixel_font;
 
     public Resources() {
@@ -28,9 +29,10 @@ public class Resources {
     public void loadImages() {
         try {
             company_logo = ImageIO.read(getClass().getResourceAsStream("/logo/bell_labs.png"));
-            start_menu = ImageIO.read(getClass().getResourceAsStream("/Start_Menu.png"));
-            hud_health_energy = ImageIO.read(getClass().getResourceAsStream("/HUD/HUD_Health_Energy.png"));
-
+            start_menu = ImageIO.read(getClass().getResourceAsStream("/start_menu.png"));
+            hud_health_energy = ImageIO.read(getClass().getResourceAsStream("/HUD/hud_health_energy.png"));
+            hud_inventory = ImageIO.read(getClass().getResourceAsStream("/HUD/hud_inventory.png"));
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
