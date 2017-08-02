@@ -6,8 +6,8 @@ import pkg.paradise.graphics.Sprite;
 public abstract class Mob extends Entity {
 
     protected Sprite sprite;
-    protected int dir = 2;
-    protected boolean moving = false;
+    public int dir = 2;
+    public boolean moving = false;
 
     /****************************************************
      * Name:        move
@@ -61,5 +61,41 @@ public abstract class Mob extends Entity {
         }
 
         return solid;
+    }
+
+    public void setDir(int dir) {
+        this.dir = dir;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public int getDir() {
+        return this.dir;
+    }
+
+    public int getX() {
+        return this.x;
+    }
+
+    public int getY() {
+        return this.y;
+    }
+
+    public void setMoving(int moving) {
+        this.moving = moving == 1;
+    }
+
+    public String getMoving() {
+        String ret = "0";
+        if (moving) {
+            ret = "1";
+        }
+        return ret;
     }
 }

@@ -58,7 +58,7 @@ public class GameStateManager {
                 gameStates[state].init();
                 break;
             case GAMEOVER:
-                //  gameStates[i] = new GameOverState(this);
+                // gameStates[i] = new GameOverState(this);
                 // gameStates[i].init();
                 break;
             default:

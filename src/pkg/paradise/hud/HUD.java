@@ -47,7 +47,5 @@ public class HUD {
         g.fillRect(91, 23, 75, 8);
         g.setColor(Color.YELLOW);
         g.fillRect(91, 52, 75, 8);
-
     }
-
 }

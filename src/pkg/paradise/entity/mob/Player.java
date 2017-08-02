@@ -8,7 +8,6 @@ import pkg.paradise.main.Game;
 public class Player extends Mob {
 
     private int anim = 0;
-    private boolean walking = false;
 
     //Empty constructor
     public Player() {
@@ -59,9 +58,9 @@ public class Player extends Mob {
         //Sending values to move
         if (xa != 0 || ya != 0) {
             move(xa, ya);
-            walking = true;
+            moving = true;
         } else {
-            walking = false;
+            moving = false;
         }
     }
 
@@ -79,7 +78,7 @@ public class Player extends Mob {
         //North
         if (dir == 0) {
             sprite = Sprite.player_up;
-            if (walking) {
+            if (moving) {
                 if (anim % 20 > 10) {
                     sprite = Sprite.player_up_1;
                 } else {
@@ -90,7 +89,7 @@ public class Player extends Mob {
         //East
         if (dir == 1) {
             sprite = Sprite.player_right;
-            if (walking) {
+            if (moving) {
                 if (anim % 20 > 10) {
                     sprite = Sprite.player_right_1;
                 } else {
@@ -101,7 +100,7 @@ public class Player extends Mob {
         //South
         if (dir == 2) {
             sprite = Sprite.player_down;
-            if (walking) {
+            if (moving) {
                 if (anim % 20 > 10) {
                     sprite = Sprite.player_down_1;
                 } else {
@@ -112,7 +111,7 @@ public class Player extends Mob {
         //West
         if (dir == 3) {
             sprite = Sprite.player_left;
-            if (walking) {
+            if (moving) {
                 if (anim % 20 > 10) {
                     sprite = Sprite.player_left_1;
                 } else {

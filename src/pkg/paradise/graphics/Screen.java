@@ -12,7 +12,6 @@ public class Screen {
     public int[] tiles = new int[MAP_SIZE * MAP_SIZE];
 
     public Screen(int widthParam, int heightParam) {
-
         this.width = widthParam;
         this.height = heightParam;
         pixels = new int[width * height];
@@ -24,7 +23,6 @@ public class Screen {
      * Description: Clears the pixels in array 
      ****************************************************/
     public void clear() {
-
         for (int i = 0; i < pixels.length; i++) {
             pixels[i] = 0;
         }
@@ -58,8 +56,7 @@ public class Screen {
 
     /****************************************************
      * Name:        renderPlayer
-     * Description: Only renders player. Extremely similar
-     * to the above renderTile method. 
+     * Description: Only renders player.
      ****************************************************/
     public void renderPlayer(int xp, int yp, Sprite sprite) {
         xp -= xOffset;

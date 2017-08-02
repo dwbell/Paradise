@@ -4,6 +4,13 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
+import java.io.IOException;
+import java.net.DatagramSocket;
+import java.util.HashMap;
+import java.util.Iterator;
+import pkg.paradise.client.Receiver;
+import pkg.paradise.client.Sender;
+import pkg.paradise.entity.mob.NetPlayer;
 import pkg.paradise.entity.mob.Player;
 import pkg.paradise.graphics.Screen;
 import pkg.paradise.hud.HUD;
@@ -15,7 +22,10 @@ import pkg.paradise.main.Game;
 public class PlayState extends GameState {
 
     private Level level;
-    private Player player;
+    public static Player player;
+    public static HashMap<String, NetPlayer> netPlayers;
+    public static Sender sender;
+    public static Receiver receiver;
     private Screen screen;
     private HUD hud;
 
@@ -37,8 +47,22 @@ public class PlayState extends GameState {
         TileCoordinate playerSpawn = new TileCoordinate(5, 5);
         player = new Player(playerSpawn.x(), playerSpawn.y());
         player.init(level);
-
         hud = new HUD(player);
+
+        //Network
+        DatagramSocket socket = null;
+        try {
+            socket = new DatagramSocket();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        sender = new Sender(socket);
+        receiver = new Receiver(socket);
+        netPlayers = new HashMap();
+
+        //Network receive message 
+        Thread rt = new Thread(receiver);
+        rt.start();
     }
 
     /****************************************************
@@ -52,6 +76,12 @@ public class PlayState extends GameState {
         handleInput();
         player.update();
         hud.update();
+
+        sender.update();
+        for (NetPlayer np : netPlayers.values()) {
+            np.update();
+        }
+       
         int xScroll = player.x - screen.width / 2;
         int yScroll = player.y - screen.height / 2;
         level.update(xScroll, yScroll, screen);
@@ -73,6 +103,10 @@ public class PlayState extends GameState {
         level.render(xScroll, yScroll, screen);
         //Putting player on screen
         player.render(screen);
+
+        for (NetPlayer np : netPlayers.values()) {
+            np.render(screen);
+        }
 
         //Drawing up screen
         System.arraycopy(screen.pixels, 0, pixels, 0, pixels.length);
