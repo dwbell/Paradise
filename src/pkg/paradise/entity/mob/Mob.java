@@ -1,11 +1,13 @@
 package pkg.paradise.entity.mob;
 
 import pkg.paradise.entity.Entity;
+import pkg.paradise.graphics.Screen;
 import pkg.paradise.graphics.Sprite;
 
 public abstract class Mob extends Entity {
 
     protected Sprite sprite;
+    private int anim = 0;
     public int dir = 2;
     public boolean moving = false;
 
@@ -45,7 +47,8 @@ public abstract class Mob extends Entity {
 
     }
 
-    public void render() {
+    @Override
+    public void render(Screen screen) {
 
     }
 
@@ -61,6 +64,10 @@ public abstract class Mob extends Entity {
         }
 
         return solid;
+    }
+
+    public void animate() {
+
     }
 
     public void setDir(int dir) {

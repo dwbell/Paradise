@@ -62,18 +62,6 @@ public class Player extends Mob {
         } else {
             moving = false;
         }
-    }
-
-    /****************************************************
-     * Name:        render
-     * Description: Players render method which is overridden
-     * from Entity class. This method is what essentially
-     * draws the player given x,y coordinates from entity
-     * and a given designated sprite object. Player animation 
-     * is controlled in here as well. 
-     ****************************************************/
-    @Override
-    public void render(Screen screen) {
 
         //North
         if (dir == 0) {
@@ -119,6 +107,18 @@ public class Player extends Mob {
                 }
             }
         }
+    }
+
+    /****************************************************
+     * Name:        render
+     * Description: Players render method which is overridden
+     * from Entity class. This method is what essentially
+     * draws the player given x,y coordinates from entity
+     * and a given designated sprite object. Player animation 
+     * is controlled in here as well. 
+     ****************************************************/
+    @Override
+    public void render(Screen screen) {
         //Actually renders player with appropiate animation
         screen.renderPlayer(x - 16, y - 16, sprite);
     }

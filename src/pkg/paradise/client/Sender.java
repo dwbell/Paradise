@@ -37,5 +37,6 @@ public class Sender {
         String ny = Integer.toString(PlayState.player.y);
         String send = mv + ":" + dir + ":" + nx + ":" + ny;
         sendMessage(send);
+
     }
 }
