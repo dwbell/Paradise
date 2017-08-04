@@ -7,9 +7,12 @@ import pkg.paradise.graphics.Sprite;
 public abstract class Mob extends Entity {
 
     protected Sprite sprite;
-    private int anim = 0;
-    public int dir = 2;
-    public boolean moving = false;
+    protected int dir = 0;
+    protected boolean moving = false;
+
+    //Animation
+    protected double aTimer;
+    protected int currAnim;
 
     /****************************************************
      * Name:        move
@@ -46,13 +49,41 @@ public abstract class Mob extends Entity {
     }
 
     @Override
-    public void update(float deta) {
-
+    public void update(float delta) {
     }
 
     @Override
     public void render(Screen screen) {
 
+    }
+
+    /****************************************************
+     * Name:        animate
+     * Description: Controls animation for a given 2D array
+     * of sprites which is 3x3 matrix. 
+     * delta: Time per frames,
+     * timer: Time to wait before proceeding to next sprite image, 
+     * name:  Controls which public static 2D array to pull from. 
+     * dir = 0:Down, 1:Right, 2:Left, 3:Up
+     ****************************************************/
+    public void animate(float delta, double timer, String name) {
+        aTimer += delta;
+        if (moving) {
+            if (aTimer > timer) {
+                if (name.equals("Player")) {
+                    sprite = Sprite.PLAYER_SPRITES[dir][currAnim];
+                }
+                if (currAnim == 2) {
+                    currAnim = 0;
+                } else {
+                    currAnim++;
+                }
+                aTimer = 0;
+            }
+        } else {
+            sprite = Sprite.PLAYER_SPRITES[dir][0];
+            currAnim = 0;
+        }
     }
 
     private boolean collision(int xMove, int yMove) {
@@ -69,10 +100,6 @@ public abstract class Mob extends Entity {
         return solid;
     }
 
-    public void animate() {
-
-    }
-
     public void setDir(int dir) {
         this.dir = dir;
     }
@@ -87,14 +114,6 @@ public abstract class Mob extends Entity {
 
     public int getDir() {
         return this.dir;
-    }
-
-    public int getX() {
-        return this.x;
-    }
-
-    public int getY() {
-        return this.y;
     }
 
     public void setMoving(int moving) {
