@@ -26,7 +26,7 @@ public class MenuState extends GameState {
      * Description: Update keyboard and check user input 
      ****************************************************/
     @Override
-    public void update() {
+    public void update(float delta) {
         Game.keyboard.update();
         handleInput();
     }

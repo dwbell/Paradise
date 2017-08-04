@@ -26,7 +26,7 @@ public class PauseState extends GameState {
      * Description: Update keyboard and handle user input 
      ****************************************************/
     @Override
-    public void update() {
+    public void update(float delta) {
         Game.keyboard.update();
         handleInput();
     }

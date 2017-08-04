@@ -23,6 +23,7 @@ public class Game extends Canvas implements Runnable {
     private Thread thread;
     private JFrame frame;
     private boolean running = false;
+    private final long SLEEP_TIME = 5L;
 
     //Declarations
     public static Keyboard keyboard;
@@ -36,7 +37,7 @@ public class Game extends Canvas implements Runnable {
         setPreferredSize(size);
         setFocusable(true);
         requestFocus();
-        
+
         //Resource loading
         resources = new Resources();
 
@@ -83,6 +84,7 @@ public class Game extends Canvas implements Runnable {
      * counter set to run at 60 frames per second. This 
      * method is machine independent. 
      ****************************************************/
+    @Override
     public void run() {
         long lastTime = System.nanoTime();
         long timer = System.currentTimeMillis();
@@ -90,16 +92,17 @@ public class Game extends Canvas implements Runnable {
         double difference = 0;
         int updates = 0;
         int frames = 0;
+        double nsPerFrame;
         requestFocus();
 
         while (running) {
-
             //Math to only call updates ~60 times per second
             long now = System.nanoTime();
             difference += (now - lastTime) / ns;
+            nsPerFrame = now - lastTime;
             lastTime = now;
             while (difference >= 1) {
-                update(); //Restricted
+                update((float) (nsPerFrame / 1.0E9)); //Restricted
                 updates++;
                 difference--;
             }
@@ -114,6 +117,7 @@ public class Game extends Canvas implements Runnable {
                 updates = 0;
                 frames = 0;
             }
+            sleep(SLEEP_TIME);
         }
         stop();
     }
@@ -123,8 +127,8 @@ public class Game extends Canvas implements Runnable {
      * Description: Restricted to updating ~60 times per
      * second. 
      ****************************************************/
-    public void update() {
-        gsm.update();
+    public void update(float delta) {
+        gsm.update(delta);
     }
 
     /****************************************************
@@ -147,6 +151,13 @@ public class Game extends Canvas implements Runnable {
 
         g.dispose(); //manual garbage collection
         bs.show(); //makes next buffer available
+    }
+
+    public void sleep(long sleep) {
+        try {
+            Thread.sleep(sleep);
+        } catch (InterruptedException ex) {
+        }
     }
 
     /***********

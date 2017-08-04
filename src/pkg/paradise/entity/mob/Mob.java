@@ -18,18 +18,21 @@ public abstract class Mob extends Entity {
      * mob.
      ****************************************************/
     public void move(int xMove, int yMove) {
-        //Controlling mob direction
+        //Right
         if (xMove > 0) {
             dir = 1;
         }
+        //Left
         if (xMove < 0) {
-            dir = 3;
-        }
-        if (yMove > 0) {
             dir = 2;
         }
-        if (yMove < 0) {
+        //Down
+        if (yMove > 0) {
             dir = 0;
+        }
+        //Up
+        if (yMove < 0) {
+            dir = 3;
         }
 
         //Collision detection for movement
@@ -43,7 +46,7 @@ public abstract class Mob extends Entity {
     }
 
     @Override
-    public void update() {
+    public void update(float deta) {
 
     }
 

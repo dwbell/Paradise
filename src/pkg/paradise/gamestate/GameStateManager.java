@@ -78,11 +78,11 @@ public class GameStateManager {
      * Name: update
      * Description:  Updates with respect to a paused game
      ****************************************************/
-    public void update() {
+    public void update(float delta) {
         if (paused) {
-            pauseState.update();
+            pauseState.update(delta);
         } else if (gameStates[currentState] != null) {
-            gameStates[currentState].update();
+            gameStates[currentState].update(delta);
         }
     }
 

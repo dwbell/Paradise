@@ -7,9 +7,7 @@ import java.awt.image.DataBufferInt;
 import java.io.IOException;
 import java.net.DatagramSocket;
 import java.util.HashMap;
-import java.util.Iterator;
-import pkg.paradise.client.Receiver;
-import pkg.paradise.client.Sender;
+import pkg.paradise.client.*;
 import pkg.paradise.entity.mob.NetPlayer;
 import pkg.paradise.entity.mob.Player;
 import pkg.paradise.graphics.Screen;
@@ -71,15 +69,15 @@ public class PlayState extends GameState {
      * adjust the values for which the screen is centered.
      ****************************************************/
     @Override
-    public void update() {
+    public void update(float delta) {
         Game.keyboard.update();
         handleInput();
-        player.update();
+        player.update(delta);
         hud.update();
 
         sender.update();
         for (NetPlayer np : netPlayers.values()) {
-            np.update();
+            np.update(delta);
         }
        
         int xScroll = player.x - screen.width / 2;

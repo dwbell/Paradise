@@ -35,7 +35,7 @@ public class IntroState extends GameState {
      * once animation is done.
      ****************************************************/
     @Override
-    public void update() {
+    public void update(float delta) {
         Game.keyboard.update();
         handleInput();
         ticks++;

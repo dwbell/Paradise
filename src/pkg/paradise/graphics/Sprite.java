@@ -12,29 +12,32 @@ public class Sprite {
 
     //Water Sprite
     public static Sprite water = new Sprite(16, 0, 0, SpriteSheet.terrain);
-   
+
     //Void Sprite
     public static Sprite voidSprite = new Sprite(16, 0x0026FF);
 
     //Player sprites for downward animation (South)
-    public static Sprite player_down = new Sprite(16, 0, 0, SpriteSheet.mob);
-    public static Sprite player_down_1 = new Sprite(16, 0, 1, SpriteSheet.mob);
-    public static Sprite player_down_2 = new Sprite(16, 0, 2, SpriteSheet.mob);
+    public final static Sprite PLAYER_DOWN = new Sprite(16, 0, 0, SpriteSheet.mob);
+    public final static Sprite PLAYER_DOWN_1 = new Sprite(16, 0, 1, SpriteSheet.mob);
+    public final static Sprite PLAYER_DOWN_2 = new Sprite(16, 0, 2, SpriteSheet.mob);
 
     //Player sprites for right animation (East)
-    public static Sprite player_right = new Sprite(16, 1, 0, SpriteSheet.mob);
-    public static Sprite player_right_1 = new Sprite(16, 1, 1, SpriteSheet.mob);
-    public static Sprite player_right_2 = new Sprite(16, 1, 2, SpriteSheet.mob);
+    public final static Sprite PLAYER_RIGHT = new Sprite(16, 1, 0, SpriteSheet.mob);
+    public final static Sprite PLAYER_RIGHT_1 = new Sprite(16, 1, 1, SpriteSheet.mob);
+    public final static Sprite PLAYER_RIGHT_2 = new Sprite(16, 1, 2, SpriteSheet.mob);
 
     //Player sprites for left animation (West)
-    public static Sprite player_left = new Sprite(16, 2, 0, SpriteSheet.mob);
-    public static Sprite player_left_1 = new Sprite(16, 2, 1, SpriteSheet.mob);
-    public static Sprite player_left_2 = new Sprite(16, 2, 2, SpriteSheet.mob);
+    public final static Sprite PLAYER_LEFT = new Sprite(16, 2, 0, SpriteSheet.mob);
+    public final static Sprite PLAYER_LEFT_1 = new Sprite(16, 2, 1, SpriteSheet.mob);
+    public final static Sprite PLAYER_LEFT_2 = new Sprite(16, 2, 2, SpriteSheet.mob);
 
     //Player sprites for up animation (North)
-    public static Sprite player_up = new Sprite(16, 3, 0, SpriteSheet.mob);
-    public static Sprite player_up_1 = new Sprite(16, 3, 1, SpriteSheet.mob);
-    public static Sprite player_up_2 = new Sprite(16, 3, 2, SpriteSheet.mob);
+    public final static Sprite PLAYER_UP = new Sprite(16, 3, 0, SpriteSheet.mob);
+    public final static Sprite PLAYER_UP_1 = new Sprite(16, 3, 1, SpriteSheet.mob);
+    public final static Sprite PLAYER_UP_2 = new Sprite(16, 3, 2, SpriteSheet.mob);
+
+    public final static Sprite[][] PLAYER_SPRITES = {{PLAYER_DOWN, PLAYER_DOWN_1, PLAYER_DOWN_2}, {PLAYER_RIGHT, PLAYER_RIGHT_1, PLAYER_RIGHT_2},
+    {PLAYER_LEFT, PLAYER_LEFT_1, PLAYER_LEFT_2}, {PLAYER_UP, PLAYER_UP_1, PLAYER_UP_2}};
 
     //Void tile constructor
     public Sprite(int sizeParam, int colorParam) {

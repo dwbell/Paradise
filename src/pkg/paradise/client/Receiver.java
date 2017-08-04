@@ -11,6 +11,7 @@ public class Receiver implements Runnable {
     private byte buf[];
     private final int BUFFER = 256;
     private DatagramSocket socket;
+    private final long SLEEP_TIME = 5L;
 
     public Receiver(DatagramSocket socket) {
         super();
@@ -48,9 +49,17 @@ public class Receiver implements Runnable {
                 PlayState.netPlayers.get(id).setY(ty);
 
                 System.out.println(moving + ":" + dir + ":" + tx + "," + ty);
+                sleep(SLEEP_TIME);
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    public void sleep(long sleep) {
+        try {
+            Thread.sleep(sleep);
+        } catch (InterruptedException ex) {
         }
     }
 }

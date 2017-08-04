@@ -5,71 +5,40 @@ import pkg.paradise.graphics.Sprite;
 
 public class NetPlayer extends Mob {
 
-    private int anim = 0;
+    private double aTimer;
+    private int currAnim = 0;
+    private final double ANIM_TIMER = .0495;
 
     public NetPlayer() {
-        this.sprite = Sprite.player_down;
+        this.sprite = Sprite.PLAYER_DOWN;
     }
 
     public NetPlayer(int x, int y) {
         this.x = x;
         this.y = y;
-        this.sprite = Sprite.player_down;
+        this.sprite = Sprite.PLAYER_DOWN;
     }
 
     @Override
-    public void update() {
-        //Capping animation cycle
-        if (anim < 7500) {
-            anim++;
+    public void update(float delta) {
+        //Running animation sequence
+        //dir = 0:Down, 1:Right, 2:Left, 3:Up
+        aTimer += delta;
+        if (moving) {
+            if (aTimer > ANIM_TIMER) {
+                sprite = Sprite.PLAYER_SPRITES[dir][currAnim];
+                if (currAnim == 2) {
+                    currAnim = 0;
+                } else {
+                    currAnim++;
+                }
+                aTimer = 0;
+            }
         } else {
-            anim = 0;
+            sprite = Sprite.PLAYER_SPRITES[dir][0];
+            currAnim = 0;
         }
 
-        //North
-        if (dir == 0) {
-            sprite = Sprite.player_up;
-            if (moving) {
-                if (anim % 20 > 10) {
-                    sprite = Sprite.player_up_1;
-                } else {
-                    sprite = Sprite.player_up_2;
-                }
-            }
-        }
-        //East
-        if (dir == 1) {
-            sprite = Sprite.player_right;
-            if (moving) {
-                if (anim % 20 > 10) {
-                    sprite = Sprite.player_right_1;
-                } else {
-                    sprite = Sprite.player_right_2;
-                }
-            }
-        }
-        //South
-        if (dir == 2) {
-            sprite = Sprite.player_down;
-            if (moving) {
-                if (anim % 20 > 10) {
-                    sprite = Sprite.player_down_1;
-                } else {
-                    sprite = Sprite.player_down_2;
-                }
-            }
-        }
-        //West
-        if (dir == 3) {
-            sprite = Sprite.player_left;
-            if (moving) {
-                if (anim % 20 > 10) {
-                    sprite = Sprite.player_left_1;
-                } else {
-                    sprite = Sprite.player_left_2;
-                }
-            }
-        }
     }
 
     @Override
