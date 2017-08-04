@@ -56,7 +56,7 @@ public class PlayState extends GameState {
         }
         sender = new Sender(socket);
         receiver = new Receiver(socket);
-        netPlayers = new HashMap();
+        netPlayers = new HashMap<>();
 
         //Network receive message 
         Thread rt = new Thread(receiver);
