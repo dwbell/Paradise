@@ -18,7 +18,7 @@ public class Resources {
     public static BufferedImage hud_inventory;
     public static BufferedImage hud_chat_background;
     public static Font font_medium = loadFont("HUD/pixel_font.ttf", 40f);
-    public static Font font_small = loadFont("HUD/pixel_font.ttf", 28f);
+    public static Font font_small = loadFont("HUD/pixel_font.ttf", 20f);
 
     public Resources() {
         loadImages();

@@ -1,11 +1,14 @@
 package pkg.paradise.main;
 
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.TextField;
 import java.awt.image.BufferStrategy;
 import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import pkg.paradise.gamestate.GameStateManager;
 import pkg.paradise.utility.Keyboard;
 import pkg.paradise.utility.Mouse;
@@ -30,7 +33,7 @@ public class Game extends Canvas implements Runnable {
     public static Keyboard keyboard;
     private GameStateManager gsm;
     private final Resources resources;
-    
+
     public Game() {
 
         //JFrame Size
@@ -95,7 +98,7 @@ public class Game extends Canvas implements Runnable {
         int frames = 0;
         double nsPerFrame;
         requestFocus();
-        
+
         while (running) {
             //Math to only call updates ~60 times per second
             long now = System.nanoTime();
@@ -107,7 +110,7 @@ public class Game extends Canvas implements Runnable {
                 updates++;
                 difference--;
             }
-            
+
             render(); //Unrestricted
             frames++;
 
@@ -149,11 +152,11 @@ public class Game extends Canvas implements Runnable {
         {
             gsm.render(g);
         }
-        
+
         g.dispose(); //manual garbage collection
         bs.show(); //makes next buffer available
     }
-    
+
     public void sleep(long sleep) {
         try {
             Thread.sleep(sleep);
@@ -165,23 +168,44 @@ public class Game extends Canvas implements Runnable {
      Main Class
      ************/
     public static TextField textfield;
+    public static JTextArea textArea;
+    public static JScrollPane scrollPane;
+
     public static void main(String[] args) {
         Game game = new Game();
         game.frame.setResizable(false);
         game.frame.setTitle("Paradise");
-        
+
+        //Chat input
         textfield = new TextField();
         textfield.setEditable(true);
         textfield.setBounds(2, 740, 395, 20);
         textfield.setVisible(false);
         game.frame.add(textfield);
-        
+
+        //Chat output
+        textArea = new JTextArea(400, 160);
+        textArea.setFocusable(false);
+        textArea.setEditable(false);
+        textArea.setBackground(Color.LIGHT_GRAY);
+
+        scrollPane = new JScrollPane(textArea);
+        scrollPane.setBounds(2, 574, 395, 160);
+        //scrollPane.setBorder(null);
+        scrollPane.setFocusable(false);
+        scrollPane.setBackground(new Color(0, 0, 0, 128));
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.setVisible(false);
+        game.frame.add(scrollPane);
+
+        //Package up game and chat frames
         game.frame.add(game);
         game.frame.pack();
         game.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         game.frame.setLocationRelativeTo(null);
         game.frame.setVisible(true);
-        
+
         game.start();
     }
 }

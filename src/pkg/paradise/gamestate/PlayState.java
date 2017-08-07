@@ -22,7 +22,6 @@ public class PlayState extends GameState {
     private Level level;
     public static Player player;
     public static HashMap<String, NetPlayer> netPlayers;
-    public static Sender sender;
     public static Receiver receiver;
     private Screen screen;
     private HUD hud;
@@ -54,7 +53,8 @@ public class PlayState extends GameState {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        sender = new Sender(socket);
+        Sender.setSocket(socket);
+        //sender = new Sender(socket);
         receiver = new Receiver(socket);
         netPlayers = new HashMap<>();
         
@@ -76,7 +76,7 @@ public class PlayState extends GameState {
         player.update(delta);
         hud.update();
 
-        sender.update();
+        Sender.update();
         for (NetPlayer np : netPlayers.values()) {
             np.update(delta);
         }

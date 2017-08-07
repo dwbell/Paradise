@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import pkg.paradise.client.Sender;
 import pkg.paradise.entity.mob.Player;
 import pkg.paradise.main.Game;
 import pkg.paradise.utility.Resources;
@@ -16,9 +17,22 @@ public class HUD implements ActionListener {
 
     public HUD(Player player) {
         this.player = player;
+
+        //Chat communication 
         this.inventoryOpen = false;
         Game.textfield.setVisible(true);
         Game.textfield.addActionListener(this);
+        Game.textfield.revalidate();
+        Game.textfield.repaint();
+
+        Game.scrollPane.setVisible(true);
+        Game.scrollPane.revalidate();
+        Game.scrollPane.repaint();
+
+        Game.textArea.setVisible(true);
+        Game.textArea.revalidate();
+        Game.textArea.repaint();
+
     }
 
     public void update() {
@@ -31,7 +45,6 @@ public class HUD implements ActionListener {
 
     public void render(Graphics g) {
         drawHealthEnergy(g);
-        drawChat(g);
         if (inventoryOpen) {
             g.drawImage(Resources.hud_inventory, 3, 80, null);
         }
@@ -54,16 +67,12 @@ public class HUD implements ActionListener {
         g.fillRect(91, 52, 75, 8);
     }
 
-    public void drawChat(Graphics g) {
-        g.setColor(Color.WHITE);
-        g.setFont(Resources.font_small);
-        g.drawImage(Resources.hud_chat_background, 0, 610, null);
-        g.drawString("12345678912345678912345678912345678912345678912", 2, 630);    //47 chars @ 28f
-    }
-    
     @Override
     public void actionPerformed(ActionEvent e) {
-        String text = Game.textfield.getText();
+        String text = "chat:" + Game.textfield.getText();
+        Sender.sendChatMessage(text);
+        Game.textArea.append(text + "\n");
+        Game.textfield.selectAll();
         System.out.println(text);
         Game.textfield.setText("");
     }
