@@ -26,7 +26,7 @@ public class Server extends Thread {
                 DatagramPacket packet = new DatagramPacket(buf, buf.length);
                 socket.receive(packet);
                 String content = new String(buf);
-                
+
                 //Pull temporary values for conditional checks
                 InetAddress clientAddress = packet.getAddress();
                 int clientPort = packet.getPort();
