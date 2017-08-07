@@ -49,6 +49,11 @@ public class Player extends Mob {
         screen.renderPlayer(x - 16, y - 16, sprite);
     }
 
+    /****************************************************
+     * Name: movement
+     * Description: Checks keyboard input, and adjusts
+     * movement accordingly.
+     ****************************************************/
     public void movement() {
         //Checking direction
         int xa = 0, ya = 0;

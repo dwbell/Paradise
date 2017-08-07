@@ -12,11 +12,21 @@ public final class Sender {
     private static final String HOST = "localhost";
     private static DatagramSocket sock;
 
-    private Sender(DatagramSocket sock) {
-        super();
+    /****************************************************
+     * Name: setSocket
+     * Description: Used to keep the socket between
+     * receiver and sender uniform. Required due to its 
+     * static nature.
+     ****************************************************/
+    public static void setSocket(DatagramSocket sock) {
         Sender.sock = sock;
     }
 
+    /****************************************************
+     * Name: sendMessage
+     * Description: Actually sends the message to the 
+     * server. Protocol:Data1:Data2
+     ****************************************************/
     private static void sendMessage(String s) {
         byte buf[] = s.getBytes();
         try {
@@ -28,23 +38,30 @@ public final class Sender {
         }
     }
 
-    //Update single players values to server
-    //~60 times per second
+    /****************************************************
+     * Name: update
+     * Description: Updates server with every ~60 times 
+     * per second, with the actual players information. 
+     * Protocol:Move:direction:newX:newY
+     ****************************************************/
     public static void update() {
         String mv = PlayState.player.getMoving();
         String dir = Integer.toString(PlayState.player.getDir());
         String nx = Integer.toString(PlayState.player.x);
         String ny = Integer.toString(PlayState.player.y);
-        String send = mv + ":" + dir + ":" + nx + ":" + ny;
+        String send = "MOVE:" + mv + ":" + dir + ":" + nx + ":" + ny;
         sendMessage(send);
 
     }
-    
-    public static void sendChatMessage(String msg){
-        sendMessage(msg);
-    }
-    
-    public static void setSocket(DatagramSocket sock){
-        Sender.sock = sock;
+
+    /****************************************************
+     * Name: sendChatMessage
+     * Description: Sends CHAT protocol message to server
+     * for distrubution to other clients. 
+     * Protocol:Message
+     ****************************************************/
+    public static void sendChatMessage(String msg) {
+        String send = "CHAT:" + msg;
+        sendMessage(send);
     }
 }

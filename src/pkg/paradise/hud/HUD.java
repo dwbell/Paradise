@@ -67,13 +67,18 @@ public class HUD implements ActionListener {
         g.fillRect(91, 52, 75, 8);
     }
 
+    /****************************************************
+     * Name: actionPerformed
+     * Description: Called when enter is hit, via the
+     * text field for the chat client. Appends text
+     * from text field into the text area for viewing.
+     ****************************************************/
     @Override
     public void actionPerformed(ActionEvent e) {
-        String text = "chat:" + Game.textfield.getText();
+        String text = Game.textfield.getText();
         Sender.sendChatMessage(text);
         Game.textArea.append(text + "\n");
         Game.textfield.selectAll();
-        System.out.println(text);
         Game.textfield.setText("");
     }
 }

@@ -9,6 +9,7 @@ import java.awt.image.BufferStrategy;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.text.DefaultCaret;
 import pkg.paradise.gamestate.GameStateManager;
 import pkg.paradise.utility.Keyboard;
 import pkg.paradise.utility.Mouse;
@@ -187,16 +188,22 @@ public class Game extends Canvas implements Runnable {
         textArea = new JTextArea(400, 160);
         textArea.setFocusable(false);
         textArea.setEditable(false);
+        textArea.setLineWrap(true);
+        textArea.setWrapStyleWord(true);
         textArea.setBackground(Color.LIGHT_GRAY);
 
+        //Chat output containing scroll pane
         scrollPane = new JScrollPane(textArea);
         scrollPane.setBounds(2, 574, 395, 160);
-        //scrollPane.setBorder(null);
         scrollPane.setFocusable(false);
         scrollPane.setBackground(new Color(0, 0, 0, 128));
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.setVisible(false);
+
+        //Allows automatic caret movement
+        DefaultCaret caret = (DefaultCaret) textArea.getCaret();
+        caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
         game.frame.add(scrollPane);
 
         //Package up game and chat frames
