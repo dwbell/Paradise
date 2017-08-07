@@ -3,6 +3,7 @@ package pkg.paradise.main;
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.TextField;
 import java.awt.image.BufferStrategy;
 import javax.swing.JFrame;
 import pkg.paradise.gamestate.GameStateManager;
@@ -21,7 +22,7 @@ public class Game extends Canvas implements Runnable {
 
     //Loop
     private Thread thread;
-    private JFrame frame;
+    public JFrame frame;
     private boolean running = false;
     private final long SLEEP_TIME = 5L;
 
@@ -29,7 +30,7 @@ public class Game extends Canvas implements Runnable {
     public static Keyboard keyboard;
     private GameStateManager gsm;
     private final Resources resources;
-
+    
     public Game() {
 
         //JFrame Size
@@ -94,7 +95,7 @@ public class Game extends Canvas implements Runnable {
         int frames = 0;
         double nsPerFrame;
         requestFocus();
-
+        
         while (running) {
             //Math to only call updates ~60 times per second
             long now = System.nanoTime();
@@ -106,7 +107,7 @@ public class Game extends Canvas implements Runnable {
                 updates++;
                 difference--;
             }
-
+            
             render(); //Unrestricted
             frames++;
 
@@ -148,11 +149,11 @@ public class Game extends Canvas implements Runnable {
         {
             gsm.render(g);
         }
-
+        
         g.dispose(); //manual garbage collection
         bs.show(); //makes next buffer available
     }
-
+    
     public void sleep(long sleep) {
         try {
             Thread.sleep(sleep);
@@ -163,16 +164,24 @@ public class Game extends Canvas implements Runnable {
     /***********
      Main Class
      ************/
+    public static TextField textfield;
     public static void main(String[] args) {
         Game game = new Game();
         game.frame.setResizable(false);
         game.frame.setTitle("Paradise");
+        
+        textfield = new TextField();
+        textfield.setEditable(true);
+        textfield.setBounds(2, 740, 395, 20);
+        textfield.setVisible(false);
+        game.frame.add(textfield);
+        
         game.frame.add(game);
         game.frame.pack();
         game.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         game.frame.setLocationRelativeTo(null);
         game.frame.setVisible(true);
-
+        
         game.start();
     }
 }

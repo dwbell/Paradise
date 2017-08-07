@@ -37,7 +37,7 @@ public class PauseState extends GameState {
      ****************************************************/
     @Override
     public void render(Graphics g) {
-        g.setFont(Resources.pixel_font);
+        g.setFont(Resources.font_medium);
         g.setColor(Color.WHITE);
         g.drawString("FUCKING MENU", 10, 100);
     }
