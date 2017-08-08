@@ -18,7 +18,7 @@ public class MenuState extends GameState {
      ****************************************************/
     @Override
     public void init() {
-       
+
     }
 
     /****************************************************
@@ -37,7 +37,6 @@ public class MenuState extends GameState {
      ****************************************************/
     @Override
     public void render(Graphics g) {
-        g.setColor(Color.BLACK);
         g.drawImage(Resources.start_menu, 0, 0, Game.SCREEN_WIDTH * Game.SCALE, Game.SCREEN_HEIGHT * Game.SCALE, null);
     }
 

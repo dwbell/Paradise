@@ -11,8 +11,9 @@ public class SpriteSheet {
     public int[] pixels;
 
     //Creating static sprite sheets here
-    public static SpriteSheet terrain = new SpriteSheet("/textures/terrain_spritesheet.png", 256);
-    public static SpriteSheet mob = new SpriteSheet("/textures/mob_spritesheet.png", 128);
+    public static SpriteSheet terrain = new SpriteSheet("/sprites/terrain_spritesheet.png", 256);
+    public static SpriteSheet mob = new SpriteSheet("/sprites/mob_spritesheet.png", 128);
+    public static SpriteSheet characters = new SpriteSheet("/sprites/characters.png", 256);
 
     public SpriteSheet(String pathParam, int sizeParam) {
         this.path = pathParam;

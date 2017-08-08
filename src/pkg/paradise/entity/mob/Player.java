@@ -7,18 +7,21 @@ import pkg.paradise.main.Game;
 
 public class Player extends Mob {
 
-    private final double ANIM_TIMER = 0.0495;
+    private final double ANIM_TIMER = 0.0395;
 
     //Empty constructor
     public Player() {
-        sprite = Sprite.PLAYER_SPRITES[0][0];
+        //sprite = Sprite.PLAYER_SPRITES[0][0];
+        sprite = Sprite.CHAR14[0][0];
     }
 
     //Constructor with x,y coords to spawn
     public Player(int x, int y) {
         this.x = x;
         this.y = y;
-        sprite = Sprite.PLAYER_SPRITES[0][0];
+        //sprite = Sprite.PLAYER_SPRITES[0][0];
+        sprite = Sprite.CHAR14[0][0];
+
     }
 
     /****************************************************

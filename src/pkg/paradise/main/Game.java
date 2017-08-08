@@ -168,7 +168,7 @@ public class Game extends Canvas implements Runnable {
     /***********
      Main Class
      ************/
-    public static TextField textfield;
+    public static TextField textField;
     public static JTextArea textArea;
     public static JScrollPane scrollPane;
 
@@ -178,11 +178,11 @@ public class Game extends Canvas implements Runnable {
         game.frame.setTitle("Paradise");
 
         //Chat input
-        textfield = new TextField();
-        textfield.setEditable(true);
-        textfield.setBounds(2, 740, 395, 20);
-        textfield.setVisible(false);
-        game.frame.add(textfield);
+        textField = new TextField();
+        textField.setEditable(true);
+        textField.setBounds(2, 740, 395, 20);
+        textField.setVisible(false);
+        game.frame.add(textField);
 
         //Chat output
         textArea = new JTextArea(400, 160);

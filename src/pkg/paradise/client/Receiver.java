@@ -71,7 +71,7 @@ public class Receiver implements Runnable {
                         //System.out.println(moving + ":" + dir + ":" + tx + "," + ty);
                         break;
                     default:
-                        System.out.println("Switch statement failed");
+                        System.out.println("Receiver.java - Switch statement failed");
                         break;
                 }
                 sleep(SLEEP_TIME);

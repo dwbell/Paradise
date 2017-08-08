@@ -20,10 +20,10 @@ public class HUD implements ActionListener {
 
         //Chat communication 
         this.inventoryOpen = false;
-        Game.textfield.setVisible(true);
-        Game.textfield.addActionListener(this);
-        Game.textfield.revalidate();
-        Game.textfield.repaint();
+        Game.textField.setVisible(true);
+        Game.textField.addActionListener(this);
+        Game.textField.revalidate();
+        Game.textField.repaint();
 
         Game.scrollPane.setVisible(true);
         Game.scrollPane.revalidate();
@@ -75,10 +75,10 @@ public class HUD implements ActionListener {
      ****************************************************/
     @Override
     public void actionPerformed(ActionEvent e) {
-        String text = Game.textfield.getText();
+        String text = Game.textField.getText();
         Sender.sendChatMessage(text);
         Game.textArea.append(text + "\n");
-        Game.textfield.selectAll();
-        Game.textfield.setText("");
+        Game.textField.selectAll();
+        Game.textField.setText("");
     }
 }
