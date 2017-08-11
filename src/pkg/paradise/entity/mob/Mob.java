@@ -71,7 +71,7 @@ public abstract class Mob extends Entity {
         if (moving) {
             if (aTimer > timer) {
                 if (name.equals("Player")) {
-                    sprite = Sprite.CHAR07[dir][currAnim];
+                    sprite = Sprite.CHAR01[dir][currAnim];
                 }
                 if (currAnim == 3) {
                     currAnim = 0;
@@ -81,7 +81,7 @@ public abstract class Mob extends Entity {
                 aTimer = 0;
             }
         } else {
-            sprite = Sprite.CHAR07[dir][0];
+            sprite = Sprite.CHAR01[dir][0];
             currAnim = 0;
         }
     }

@@ -61,7 +61,9 @@ public final class Sender {
      * Protocol:Message
      ****************************************************/
     public static void sendChatMessage(String msg) {
-        String send = "CHAT:" + msg;
-        sendMessage(send);
+        if (!msg.isEmpty()) {
+            String send = "CHAT:" + msg;
+            sendMessage(send);
+        }
     }
 }

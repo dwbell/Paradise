@@ -1,5 +1,7 @@
 package pkg.paradise.graphics;
 
+import java.util.ArrayList;
+
 public class Sprite {
 
     protected final int SIZE;
@@ -354,6 +356,27 @@ public class Sprite {
     private final static Sprite CHAR16_LEFT_3 = new Sprite(16, 15, 15, SpriteSheet.characters);
     public final static Sprite[][] CHAR16 = {{CHAR16_DOWN, CHAR16_DOWN_1, CHAR16_DOWN_2, CHAR16_DOWN_3}, {CHAR16_RIGHT, CHAR16_RIGHT_1, CHAR16_RIGHT_2, CHAR16_RIGHT_3},
     {CHAR16_LEFT, CHAR16_LEFT_1, CHAR16_LEFT_2, CHAR16_LEFT_3}, {CHAR16_UP, CHAR16_UP_1, CHAR16_UP_2, CHAR16_UP_3}};
+
+    public final static ArrayList<Sprite[][]> ALL_CHARACTERS = new ArrayList<>();
+
+    static {
+        ALL_CHARACTERS.add(CHAR01);
+        ALL_CHARACTERS.add(CHAR02);
+        ALL_CHARACTERS.add(CHAR03);
+        ALL_CHARACTERS.add(CHAR04);
+        ALL_CHARACTERS.add(CHAR05);
+        ALL_CHARACTERS.add(CHAR06);
+        ALL_CHARACTERS.add(CHAR07);
+        ALL_CHARACTERS.add(CHAR08);
+        ALL_CHARACTERS.add(CHAR09);
+        ALL_CHARACTERS.add(CHAR10);
+        ALL_CHARACTERS.add(CHAR11);
+        ALL_CHARACTERS.add(CHAR12);
+        ALL_CHARACTERS.add(CHAR13);
+        ALL_CHARACTERS.add(CHAR14);
+        ALL_CHARACTERS.add(CHAR15);
+        ALL_CHARACTERS.add(CHAR16);
+    }
 
     //Void tile constructor
     public Sprite(int sizeParam, int colorParam) {

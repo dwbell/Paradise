@@ -48,6 +48,7 @@ public class Receiver implements Runnable {
                         String msg = s[2];
                         //Add to text area
                         Game.textArea.append(msg + newLine);
+
                         break;
                     case "MOVE":
                         String[] coords = received.split(":");
