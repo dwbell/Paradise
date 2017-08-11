@@ -42,35 +42,37 @@ public class Receiver implements Runnable {
 
                 //Check its protocol and act accordingly
                 switch (getProtocol(received)) {
-                    case "CHAT":
-                        String s[] = received.split(":");
+                    case "CHAT": {
+                        String rec[] = received.split(":");
                         //String prot = coords[1];
-                        String msg = s[2];
+                        String msg = rec[2];
                         //Add to text area
                         Game.textArea.append(msg + newLine);
-
-                        break;
-                    case "MOVE":
-                        String[] coords = received.split(":");
-                        String id = coords[0];
+                    }
+                    break;
+                    case "MOVE": {
+                        String[] rec = received.split(":");
+                        String id = rec[0];
                         //String prot = coords[1];
-                        int moving = Integer.parseInt(coords[2]);
-                        int dir = Integer.parseInt(coords[3]);
-                        int tx = Integer.parseInt(coords[4]);
-                        int ty = Integer.parseInt(coords[5]);
+                        int selection = Integer.parseInt(rec[2]);
+                        int moving = Integer.parseInt(rec[3]);
+                        int dir = Integer.parseInt(rec[4]);
+                        int tx = Integer.parseInt(rec[5]);
+                        int ty = Integer.parseInt(rec[6]);
 
                         //Only add if it's new, checked by address and port
                         if (!PlayState.netPlayers.containsKey(id)) {
-                            PlayState.netPlayers.put(id, new NetPlayer(tx, ty));
+                            PlayState.netPlayers.put(id, new NetPlayer(selection, tx, ty));
                         }
 
-                        //Set respected id to new x,y position
+                        //Set respected id's new data
                         PlayState.netPlayers.get(id).setMoving(moving);
                         PlayState.netPlayers.get(id).setDir(dir);
                         PlayState.netPlayers.get(id).setX(tx);
                         PlayState.netPlayers.get(id).setY(ty);
                         //System.out.println(moving + ":" + dir + ":" + tx + "," + ty);
                         break;
+                    }
                     default:
                         System.out.println("Receiver.java - Switch statement failed");
                         break;

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import pkg.paradise.gamestate.MenuState;
 import pkg.paradise.gamestate.PlayState;
 
 public final class Sender {
@@ -11,6 +12,7 @@ public final class Sender {
     private static final int PORT = 4445;
     private static final String HOST = "localhost";
     private static DatagramSocket sock;
+    private static final int SEL = MenuState.selection;
 
     /****************************************************
      * Name: setSocket
@@ -42,16 +44,16 @@ public final class Sender {
      * Name: update
      * Description: Updates server with every ~60 times 
      * per second, with the actual players information. 
-     * Protocol:Move:direction:newX:newY
+     * Protocol:Move:direction:selection:newX:newY
      ****************************************************/
     public static void update() {
         String mv = PlayState.player.getMoving();
+        //Selection pulled from above
         String dir = Integer.toString(PlayState.player.getDir());
         String nx = Integer.toString(PlayState.player.x);
         String ny = Integer.toString(PlayState.player.y);
-        String send = "MOVE:" + mv + ":" + dir + ":" + nx + ":" + ny;
+        String send = "MOVE:" + SEL + ":" + mv + ":" + dir + ":" + nx + ":" + ny;
         sendMessage(send);
-
     }
 
     /****************************************************
@@ -61,9 +63,7 @@ public final class Sender {
      * Protocol:Message
      ****************************************************/
     public static void sendChatMessage(String msg) {
-        if (!msg.isEmpty()) {
-            String send = "CHAT:" + msg;
-            sendMessage(send);
-        }
+        String send = "CHAT:" + msg;
+        sendMessage(send);
     }
 }

@@ -63,16 +63,14 @@ public abstract class Mob extends Entity {
      * of sprites which is 3x3 matrix. 
      * delta: Time per frames,
      * timer: Time to wait before proceeding to next sprite image, 
-     * name:  Controls which public static 2D array to pull from. 
+     * selection: Which player character was chosen 
      * dir = 0:Down, 1:Right, 2:Left, 3:Up
      ****************************************************/
-    public void animate(float delta, double timer, String name) {
+    public void animate(float delta, double timer, int selection) {
         aTimer += delta;
         if (moving) {
             if (aTimer > timer) {
-                if (name.equals("Player")) {
-                    sprite = Sprite.CHAR01[dir][currAnim];
-                }
+                sprite = Sprite.ALL_CHARACTERS.get(selection)[dir][currAnim];
                 if (currAnim == 3) {
                     currAnim = 0;
                 } else {
@@ -81,7 +79,7 @@ public abstract class Mob extends Entity {
                 aTimer = 0;
             }
         } else {
-            sprite = Sprite.CHAR01[dir][0];
+            sprite = Sprite.ALL_CHARACTERS.get(selection)[dir][0];
             currAnim = 0;
         }
     }

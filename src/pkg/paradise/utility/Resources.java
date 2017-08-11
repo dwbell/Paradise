@@ -26,7 +26,7 @@ public class Resources {
 
     /****************************************************
      * Name:        loadImages 
-     * Description: Loads up the 
+     * Description: Loads up some display images.
      ****************************************************/
     private void loadImages() {
         try {

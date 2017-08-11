@@ -5,16 +5,14 @@ import pkg.paradise.graphics.Sprite;
 
 public class NetPlayer extends Mob {
 
-   private final double ANIM_TIMER = 0.0495;
-   
-    public NetPlayer() {
-        this.sprite = Sprite.PLAYER_SPRITES[0][0];
-    }
-
-    public NetPlayer(int x, int y) {
+    private final double ANIM_TIMER = 0.0395;
+    private int selection = 0;
+    
+    public NetPlayer(int selection, int x, int y) {
+        this.selection = selection;
         this.x = x;
         this.y = y;
-        this.sprite = Sprite.PLAYER_SPRITES[0][0];
+        this.sprite = Sprite.ALL_CHARACTERS.get(selection)[0][0];
     }
 
     /****************************************************
@@ -25,7 +23,7 @@ public class NetPlayer extends Mob {
      ****************************************************/
     @Override
     public void update(float delta) {
-        animate(delta, ANIM_TIMER, "Player");
+        super.animate(delta, ANIM_TIMER, selection);
     }
 
     /****************************************************

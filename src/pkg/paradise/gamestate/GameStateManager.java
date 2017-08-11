@@ -3,7 +3,7 @@ package pkg.paradise.gamestate;
 import java.awt.Graphics;
 
 public class GameStateManager {
-
+    
     private boolean paused;
     private PauseState pauseState;
 

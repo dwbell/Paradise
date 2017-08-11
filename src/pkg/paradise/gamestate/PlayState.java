@@ -42,10 +42,10 @@ public class PlayState extends GameState {
         screen = new Screen(Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT);
         level = new SpawnLevel("/sprites/level.png");
         TileCoordinate playerSpawn = new TileCoordinate(5, 5);
-        player = new Player(playerSpawn.x(), playerSpawn.y());
+        player = new Player(MenuState.selection, playerSpawn.x(), playerSpawn.y());
         player.init(level);
         hud = new HUD(player);
-
+        
         //Network
         DatagramSocket socket = null;
         try {

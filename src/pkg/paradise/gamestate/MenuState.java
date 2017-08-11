@@ -13,7 +13,7 @@ public class MenuState extends GameState {
     private BufferedImage characterImage;
     private final int SIZE = 16;
     private final int SCALE = 6;
-    private int selection;
+    public static int selection;
 
     public MenuState(GameStateManager gsm) {
         super(gsm);
@@ -21,7 +21,7 @@ public class MenuState extends GameState {
 
     /****************************************************
      * Name: init
-     * Description: Initializes Menu image
+     * Description: Initializes character image
      ****************************************************/
     @Override
     public void init() {

@@ -18,7 +18,7 @@ public class HUD implements ActionListener {
     public HUD(Player player) {
         this.player = player;
 
-        //Chat communication 
+        //Chat communication display
         this.inventoryOpen = false;
         Game.textField.setVisible(true);
         Game.textField.addActionListener(this);
@@ -76,9 +76,11 @@ public class HUD implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         String text = Game.textField.getText();
-        Sender.sendChatMessage(text);
-        Game.textArea.append(text + "\n");
-        Game.textField.selectAll();
-        Game.textField.setText("");
+        if (!text.isEmpty()) {
+            Sender.sendChatMessage(text);
+            Game.textArea.append(text + "\n");
+            Game.textField.selectAll();
+            Game.textField.setText("");
+        }
     }
 }

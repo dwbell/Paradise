@@ -8,18 +8,20 @@ import pkg.paradise.main.Game;
 public class Player extends Mob {
 
     private final double ANIM_TIMER = 0.0395;
+    private int selection = 0;
 
     //Empty constructor
-    public Player() {
-        sprite = Sprite.CHAR01[0][0];
+    public Player(int selection) {
+        this.selection = selection;
+        this.sprite = Sprite.ALL_CHARACTERS.get(selection)[0][0];
     }
 
     //Constructor with x,y coords to spawn
-    public Player(int x, int y) {
+    public Player(int selection, int x, int y) {
+        this.selection = selection;
         this.x = x;
         this.y = y;
-        sprite = Sprite.CHAR01[0][0];
-
+        this.sprite = Sprite.ALL_CHARACTERS.get(selection)[0][0];
     }
 
     /****************************************************
@@ -33,7 +35,7 @@ public class Player extends Mob {
     @Override
     public void update(float delta) {
         movement();
-        animate(delta, ANIM_TIMER, "Player");
+        animate(delta, ANIM_TIMER, selection);
     }
 
     /****************************************************
