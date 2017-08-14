@@ -47,7 +47,7 @@ public class Receiver implements Runnable {
                         //String prot = coords[1];
                         String msg = rec[2];
                         //Add to text area
-                        Game.textArea.append(msg + newLine);
+                        Game.txtArea.append(msg + newLine);
                     }
                     break;
                     case "MOVE": {

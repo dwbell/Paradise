@@ -45,7 +45,7 @@ public class PlayState extends GameState {
         player = new Player(MenuState.selection, playerSpawn.x(), playerSpawn.y());
         player.init(level);
         hud = new HUD(player);
-        
+
         //Network
         DatagramSocket socket = null;
         try {
@@ -57,7 +57,7 @@ public class PlayState extends GameState {
         //sender = new Sender(socket);
         receiver = new Receiver(socket);
         netPlayers = new HashMap<>();
-        
+
         //Network receive message 
         Thread rt = new Thread(receiver);
         rt.start();
@@ -80,7 +80,7 @@ public class PlayState extends GameState {
         for (NetPlayer np : netPlayers.values()) {
             np.update(delta);
         }
-       
+
         int xScroll = player.x - screen.width / 2;
         int yScroll = player.y - screen.height / 2;
         level.update(xScroll, yScroll, screen);
@@ -100,12 +100,12 @@ public class PlayState extends GameState {
         int yScroll = player.y - screen.height / 2;
         //Levels render
         level.render(xScroll, yScroll, screen);
-        //Putting player on screen
-        player.render(screen);
-
+        //Other players characters
         for (NetPlayer np : netPlayers.values()) {
             np.render(screen);
         }
+        //Putting player on screen
+        player.render(screen);
 
         //Drawing up screen
         System.arraycopy(screen.pixels, 0, pixels, 0, pixels.length);

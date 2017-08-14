@@ -1,38 +1,56 @@
 package pkg.paradise.hud;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import javax.swing.JFrame;
 import pkg.paradise.client.Sender;
 import pkg.paradise.entity.mob.Player;
 import pkg.paradise.main.Game;
 import pkg.paradise.utility.Resources;
 
-public class HUD implements ActionListener {
+public class HUD extends JFrame implements ActionListener {
 
     private Player player;
     private boolean inventoryOpen;
 
     public HUD(Player player) {
         this.player = player;
-
-        //Chat communication display
         this.inventoryOpen = false;
-        Game.textField.setVisible(true);
-        Game.textField.addActionListener(this);
-        Game.textField.revalidate();
-        Game.textField.repaint();
 
-        Game.scrollPane.setVisible(true);
-        Game.scrollPane.revalidate();
-        Game.scrollPane.repaint();
+        /*
+        //Chat input
+        JTextField txtField = new JTextField();
+        txtField.setBounds(2, 740, 395, 20);
+        txtField.setEditable(true);
+        txtField.setVisible(true);
+        txtField.setBackground(Color.WHITE);
+        txtField.setForeground(Color.BLACK);
+      
+        Game.txtField.setVisible(true);
+        Game.txtField.addActionListener(this);
+        Game.txtField.setOpaque(false);
+        Game.txtField.setBackground(new Color(0,0,0,0));
+        Game.txtField.revalidate();
+        Game.txtField.repaint();
+        
+        Game.sPane.setVisible(true);
+        Game.sPane.revalidate();
+        Game.sPane.repaint();
 
-        Game.textArea.setVisible(true);
-        Game.textArea.revalidate();
-        Game.textArea.repaint();
+        Game.txtArea.setVisible(true);
+        Game.txtArea.revalidate();
+        Game.txtArea.repaint();
+         */
+    }
 
+    public void setComponentVisible(Component txt) {
+        txt.setVisible(true);
+        txt.revalidate();
+        txt.repaint();
     }
 
     public void update() {
@@ -75,12 +93,12 @@ public class HUD implements ActionListener {
      ****************************************************/
     @Override
     public void actionPerformed(ActionEvent e) {
-        String text = Game.textField.getText();
+        String text = Game.txtField.getText();
         if (!text.isEmpty()) {
             Sender.sendChatMessage(text);
-            Game.textArea.append(text + "\n");
-            Game.textField.selectAll();
-            Game.textField.setText("");
+            Game.txtArea.append(text + "\n");
+            Game.txtField.selectAll();
+            Game.txtField.setText("");
         }
     }
 }

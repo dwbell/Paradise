@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import javax.imageio.ImageIO;
 
-public class Resources {
+public final class Resources {
 
     //Intro Logo
     public static BufferedImage company_logo;
