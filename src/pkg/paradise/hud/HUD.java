@@ -21,22 +21,12 @@ public class HUD extends JFrame implements ActionListener {
         this.player = player;
         this.inventoryOpen = false;
 
-        /*
-        //Chat input
-        JTextField txtField = new JTextField();
-        txtField.setBounds(2, 740, 395, 20);
-        txtField.setEditable(true);
-        txtField.setVisible(true);
-        txtField.setBackground(Color.WHITE);
-        txtField.setForeground(Color.BLACK);
-      
         Game.txtField.setVisible(true);
         Game.txtField.addActionListener(this);
-        Game.txtField.setOpaque(false);
-        Game.txtField.setBackground(new Color(0,0,0,0));
         Game.txtField.revalidate();
         Game.txtField.repaint();
-        
+
+        /*
         Game.sPane.setVisible(true);
         Game.sPane.revalidate();
         Game.sPane.repaint();
@@ -45,12 +35,6 @@ public class HUD extends JFrame implements ActionListener {
         Game.txtArea.revalidate();
         Game.txtArea.repaint();
          */
-    }
-
-    public void setComponentVisible(Component txt) {
-        txt.setVisible(true);
-        txt.revalidate();
-        txt.repaint();
     }
 
     public void update() {
@@ -96,7 +80,7 @@ public class HUD extends JFrame implements ActionListener {
         String text = Game.txtField.getText();
         if (!text.isEmpty()) {
             Sender.sendChatMessage(text);
-            Game.txtArea.append(text + "\n");
+            //Game.txtArea.append(text + "\n");
             Game.txtField.selectAll();
             Game.txtField.setText("");
         }

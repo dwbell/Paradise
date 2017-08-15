@@ -4,17 +4,17 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.TextField;
 import java.awt.image.BufferStrategy;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import pkg.paradise.gamestate.GameStateManager;
 import pkg.paradise.utility.Keyboard;
 import pkg.paradise.utility.Mouse;
 import pkg.paradise.utility.Resources;
-import java.awt.Rectangle;
+import javax.swing.JLayeredPane;
+import javax.swing.JTextField;
+import javax.swing.text.DefaultCaret;
 
 public class Game extends Canvas implements Runnable {
 
@@ -44,10 +44,8 @@ public class Game extends Canvas implements Runnable {
         setFocusable(true);
         requestFocus();
 
-        //Resource loading
-        resources = new Resources();
-
         //Initializing Classes
+        resources = new Resources();
         frame = new JFrame();
         keyboard = new Keyboard();
 
@@ -169,14 +167,22 @@ public class Game extends Canvas implements Runnable {
     /***********
      Main Class
      ************/
-    public static TextField txtField;
+    public static JTextField txtField;
     public static JTextArea txtArea;
     public static JScrollPane sPane;
+    public static JLayeredPane layeredPane;
 
     public static void main(String[] args) {
         Game game = new Game();
         game.frame.setResizable(false);
         game.frame.setTitle("Paradise");
+
+        //Chat input
+        txtField = new JTextField();
+        txtField.setEditable(true);
+        txtField.setBounds(2, 740, 395, 20);
+        txtField.setVisible(false);
+        game.frame.add(txtField);
 
         /*
         //Chat output
@@ -187,22 +193,19 @@ public class Game extends Canvas implements Runnable {
         txtArea.setLineWrap(true);
         txtArea.setWrapStyleWord(true);
         txtArea.setBackground(Color.LIGHT_GRAY);
-
+        
         //Chat output containing scroll pane
         sPane = new JScrollPane(txtArea);
         sPane.setBounds(2, 574, 395, 160);
         sPane.setFocusable(false);
-        sPane.setBackground(new Color(0, 0, 0, 254));
         sPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
         sPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         sPane.setVisible(false);
-
         //Allows automatic caret movement
         DefaultCaret caret = (DefaultCaret) txtArea.getCaret();
         caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
         game.frame.add(sPane);
          */
-        //Package up game and chat frames
         game.frame.add(game);
         game.frame.pack();
         game.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -210,20 +213,5 @@ public class Game extends Canvas implements Runnable {
         game.frame.setVisible(true);
 
         game.start();
-    }
-
-    private static class TransparentPanel extends JPanel {
-
-        {
-            setOpaque(false);
-        }
-
-        @Override
-        public void paintComponent(Graphics g) {
-            g.setColor(getBackground());
-            Rectangle r = g.getClipBounds();
-            g.fillRect(r.x, r.y, r.width, r.height);
-            super.paintComponent(g);
-        }
     }
 }
