@@ -1,7 +1,6 @@
 package pkg.paradise.hud;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,16 +24,6 @@ public class HUD extends JFrame implements ActionListener {
         Game.txtField.addActionListener(this);
         Game.txtField.revalidate();
         Game.txtField.repaint();
-
-        /*
-        Game.sPane.setVisible(true);
-        Game.sPane.revalidate();
-        Game.sPane.repaint();
-
-        Game.txtArea.setVisible(true);
-        Game.txtArea.revalidate();
-        Game.txtArea.repaint();
-         */
     }
 
     public void update() {
@@ -50,6 +39,9 @@ public class HUD extends JFrame implements ActionListener {
         if (inventoryOpen) {
             g.drawImage(Resources.hud_inventory, 3, 80, null);
         }
+        //g.drawImage(Resources.hud_chat_background, 0, 600, null);
+        g.setColor(new Color(0, 0, 0, 60));
+        g.fillRect(0, 565, 400, 200);
     }
 
     /****************************************************

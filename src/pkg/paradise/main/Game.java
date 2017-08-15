@@ -1,7 +1,6 @@
 package pkg.paradise.main;
 
 import java.awt.Canvas;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
@@ -14,7 +13,6 @@ import pkg.paradise.utility.Mouse;
 import pkg.paradise.utility.Resources;
 import javax.swing.JLayeredPane;
 import javax.swing.JTextField;
-import javax.swing.text.DefaultCaret;
 
 public class Game extends Canvas implements Runnable {
 
@@ -182,30 +180,10 @@ public class Game extends Canvas implements Runnable {
         txtField.setEditable(true);
         txtField.setBounds(2, 740, 395, 20);
         txtField.setVisible(false);
+        txtField.setBorder(null);
         game.frame.add(txtField);
 
-        /*
-        //Chat output
-        txtArea = new JTextArea(400, 160);
-        txtArea.setFocusable(false);
-        txtArea.setEditable(false);
-        txtArea.setVisible(false);
-        txtArea.setLineWrap(true);
-        txtArea.setWrapStyleWord(true);
-        txtArea.setBackground(Color.LIGHT_GRAY);
         
-        //Chat output containing scroll pane
-        sPane = new JScrollPane(txtArea);
-        sPane.setBounds(2, 574, 395, 160);
-        sPane.setFocusable(false);
-        sPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
-        sPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        sPane.setVisible(false);
-        //Allows automatic caret movement
-        DefaultCaret caret = (DefaultCaret) txtArea.getCaret();
-        caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
-        game.frame.add(sPane);
-         */
         game.frame.add(game);
         game.frame.pack();
         game.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
