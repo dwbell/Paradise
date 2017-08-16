@@ -26,7 +26,6 @@ public class JTextFieldLimit extends PlainDocument {
             return;
         }
         if ((getLength() + str.length()) <= LIMIT && HUD.stringWidth < CHAT_PIXEL_MAX) {
-            System.out.println(getLength());
             super.insertString(offset, str, attr);
         }
     }
