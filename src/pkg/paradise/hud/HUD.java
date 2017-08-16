@@ -1,10 +1,12 @@
 package pkg.paradise.hud;
 
 import java.awt.Color;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import pkg.paradise.client.Sender;
@@ -14,22 +16,30 @@ import pkg.paradise.utility.Resources;
 
 public class HUD extends JFrame implements ActionListener {
 
-    private Player player;
+    private final Player player;
     public static ArrayList<ChatString> chat = new ArrayList<>();
     private boolean inventoryOpen;
+    public static int stringWidth = 0;
     private final int CHAT_TOP = 580;
+    private final int CHAT_CHAR_MAX = 135;
+    public static Rectangle2D r;
 
     public HUD(Player player) {
         this.player = player;
         this.inventoryOpen = false;
-        
+
         //Chat input
         Game.txtField.setVisible(true);
         Game.txtField.addActionListener(this);
+        Game.txtField.setDocument(new JTextFieldLimit(CHAT_CHAR_MAX));
         Game.txtField.revalidate();
         Game.txtField.repaint();
     }
 
+    /****************************************************
+     * Name: 
+     * Description: 
+     ****************************************************/
     public void update() {
         if (Game.keyboard.keyDownOnce(KeyEvent.VK_I) && !inventoryOpen) {
             inventoryOpen = true;
@@ -38,6 +48,10 @@ public class HUD extends JFrame implements ActionListener {
         }
     }
 
+    /****************************************************
+     * Name: 
+     * Description: 
+     ****************************************************/
     public void render(Graphics g) {
         drawHealthEnergy(g);
         if (inventoryOpen) {
@@ -68,6 +82,9 @@ public class HUD extends JFrame implements ActionListener {
         g.fillRect(0, 565, 400, 200);
         g.setColor(Color.WHITE);
         g.setFont(Resources.font_small);
+        //Measure string width for txtField bounds check
+        FontMetrics metrics = g.getFontMetrics(Resources.font_small);
+        stringWidth = metrics.stringWidth(Game.txtField.getText());
         for (int i = 0; i < chat.size(); i++) {
             ChatString curr = chat.get(i);
             if (curr.getY() > CHAT_TOP) {
@@ -86,7 +103,7 @@ public class HUD extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String text = Game.txtField.getText();
         if (!text.isEmpty()) {
-             
+
             Sender.sendChatMessage(text);
             for (int i = 0; i < chat.size(); i++) {
                 ChatString curr = chat.get(i);

@@ -50,7 +50,6 @@ public class Receiver implements Runnable {
                         //String prot = coords[1];
                         String msg = rec[2];
                         //Add to text area
-                        //Game.txtArea.append(msg + newLine);
                         for (int i = 0; i < HUD.chat.size(); i++) {
                             ChatString curr = HUD.chat.get(i);
                             curr.setY(HUD.chat.get(i).getY() - 20);

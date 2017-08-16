@@ -5,18 +5,11 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import javax.swing.JFrame;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import pkg.paradise.gamestate.GameStateManager;
 import pkg.paradise.utility.Keyboard;
 import pkg.paradise.utility.Mouse;
 import pkg.paradise.utility.Resources;
-import javax.swing.JLayeredPane;
 import javax.swing.JTextField;
-import javax.swing.text.AttributeSet;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.PlainDocument;
-import pkg.paradise.hud.JTextFieldLimit;
 
 public class Game extends Canvas implements Runnable {
 
@@ -171,9 +164,6 @@ public class Game extends Canvas implements Runnable {
      Main Class
      ************/
     public static JTextField txtField;
-    public static JTextArea txtArea;
-    public static JLayeredPane layeredPane;
-
     public static void main(String[] args) {
         Game game = new Game();
         game.frame.setResizable(false);
@@ -186,7 +176,6 @@ public class Game extends Canvas implements Runnable {
         txtField.setVisible(false);
         txtField.setBorder(null);
         game.frame.add(txtField);
-        txtField.setDocument(new JTextFieldLimit(55));
 
         game.frame.add(game);
         game.frame.pack();
