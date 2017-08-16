@@ -13,6 +13,10 @@ import pkg.paradise.utility.Mouse;
 import pkg.paradise.utility.Resources;
 import javax.swing.JLayeredPane;
 import javax.swing.JTextField;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.PlainDocument;
+import pkg.paradise.hud.JTextFieldLimit;
 
 public class Game extends Canvas implements Runnable {
 
@@ -158,7 +162,8 @@ public class Game extends Canvas implements Runnable {
     public void sleep(long sleep) {
         try {
             Thread.sleep(sleep);
-        } catch (InterruptedException ex) {
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 
@@ -167,7 +172,6 @@ public class Game extends Canvas implements Runnable {
      ************/
     public static JTextField txtField;
     public static JTextArea txtArea;
-    public static JScrollPane sPane;
     public static JLayeredPane layeredPane;
 
     public static void main(String[] args) {
@@ -182,8 +186,8 @@ public class Game extends Canvas implements Runnable {
         txtField.setVisible(false);
         txtField.setBorder(null);
         game.frame.add(txtField);
+        txtField.setDocument(new JTextFieldLimit(55));
 
-        
         game.frame.add(game);
         game.frame.pack();
         game.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

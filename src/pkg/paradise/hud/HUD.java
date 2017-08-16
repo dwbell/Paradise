@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import javax.swing.JFrame;
 import pkg.paradise.client.Sender;
 import pkg.paradise.entity.mob.Player;
@@ -14,12 +15,15 @@ import pkg.paradise.utility.Resources;
 public class HUD extends JFrame implements ActionListener {
 
     private Player player;
+    public static ArrayList<ChatString> chat = new ArrayList<>();
     private boolean inventoryOpen;
+    private final int CHAT_TOP = 580;
 
     public HUD(Player player) {
         this.player = player;
         this.inventoryOpen = false;
-
+        
+        //Chat input
         Game.txtField.setVisible(true);
         Game.txtField.addActionListener(this);
         Game.txtField.revalidate();
@@ -39,9 +43,7 @@ public class HUD extends JFrame implements ActionListener {
         if (inventoryOpen) {
             g.drawImage(Resources.hud_inventory, 3, 80, null);
         }
-        //g.drawImage(Resources.hud_chat_background, 0, 600, null);
-        g.setColor(new Color(0, 0, 0, 60));
-        g.fillRect(0, 565, 400, 200);
+        drawChatArea(g);
     }
 
     /****************************************************
@@ -61,6 +63,19 @@ public class HUD extends JFrame implements ActionListener {
         g.fillRect(91, 52, 75, 8);
     }
 
+    public void drawChatArea(Graphics g) {
+        g.setColor(new Color(0, 0, 0, 60));
+        g.fillRect(0, 565, 400, 200);
+        g.setColor(Color.WHITE);
+        g.setFont(Resources.font_small);
+        for (int i = 0; i < chat.size(); i++) {
+            ChatString curr = chat.get(i);
+            if (curr.getY() > CHAT_TOP) {
+                g.drawString(curr.getMsg(), curr.getX(), curr.getY());
+            }
+        }
+    }
+
     /****************************************************
      * Name: actionPerformed
      * Description: Called when enter is hit, via the
@@ -71,8 +86,13 @@ public class HUD extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String text = Game.txtField.getText();
         if (!text.isEmpty()) {
+             
             Sender.sendChatMessage(text);
-            //Game.txtArea.append(text + "\n");
+            for (int i = 0; i < chat.size(); i++) {
+                ChatString curr = chat.get(i);
+                curr.setY(chat.get(i).getY() - 20);
+            }
+            chat.add(new ChatString(text, chat.size() + 1));
             Game.txtField.selectAll();
             Game.txtField.setText("");
         }

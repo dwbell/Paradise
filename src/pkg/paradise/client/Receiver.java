@@ -5,6 +5,9 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import pkg.paradise.entity.mob.NetPlayer;
 import pkg.paradise.gamestate.PlayState;
+import pkg.paradise.hud.ChatString;
+import pkg.paradise.hud.HUD;
+import static pkg.paradise.hud.HUD.chat;
 import pkg.paradise.main.Game;
 
 public class Receiver implements Runnable {
@@ -47,7 +50,12 @@ public class Receiver implements Runnable {
                         //String prot = coords[1];
                         String msg = rec[2];
                         //Add to text area
-                        Game.txtArea.append(msg + newLine);
+                        //Game.txtArea.append(msg + newLine);
+                        for (int i = 0; i < HUD.chat.size(); i++) {
+                            ChatString curr = HUD.chat.get(i);
+                            curr.setY(HUD.chat.get(i).getY() - 20);
+                        }
+                        chat.add(new ChatString(msg, chat.size() + 1));
                     }
                     break;
                     case "MOVE": {
